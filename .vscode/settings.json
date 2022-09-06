@@ -1,0 +1,7 @@
+{
+    "editor.fontFamily": "caskaydiacove nerd font",
+    "prettier.tabWidth": 4,
+    "prettier.jsxSingleQuote": false,
+    "prettier.semi": false,
+    "prettier.singleQuote": true
+}
