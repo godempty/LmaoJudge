@@ -26,3 +26,11 @@ nav{
 	margin-bottom: 5px;
 	border-radius: 7px;
 }
+
+#login{
+	color: darkorange;
+}
+
+#login:hover{
+	color: white;
+}
