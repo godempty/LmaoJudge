@@ -1,28 +1,29 @@
 div.navbar-nav a{
-	border-radius: 9px;
-	color: #d1cfc9;
+       border-radius: 9px;
+       color: white;
 }
 
 div.navbar-nav a:hover{
-	background-color: darkorange;
-	border-radius: 9px;
+       background-color:rgba(214, 137, 60, 0.8);
+       border-radius: 9px;
 }
 
 .navbar-brand{
-	color: white;
-	font-weight: bold;
-	margin-left: 20px;
-	transition-duration: 0.2s;
+       color: white;
+       font-weight: bold;
+       margin-left: 20px;
+       transition-duration: 0.2s;
 }
+
 .navbar-brand:hover{
-	color: darkorange;
+       color: darkorange;
 }
 
 nav{
-	background-color: black;
-	margin-top: 7px;
-	margin-right: 9px;
-	margin-left: 9px;
-	margin-bottom: 5px;
-	border-radius: 7px;
+       background-color: black;
+       margin-top: 7px;
+       margin-right: 9px;
+       margin-left: 9px;
+       margin-bottom: 5px;
+       border-radius: 7px;
 }
