@@ -1,6 +1,8 @@
 div.navbar-nav a{
 	border-radius: 9px;
 	color: white;
+	padding-left:5px;
+	padding-right: 5px;
 }
 
 div.navbar-nav a:hover{
@@ -25,4 +27,13 @@ nav{
 	margin-left: 9px;
 	margin-bottom: 5px;
 	border-radius: 7px;
+}
+
+#login{
+	color: darkorange;
+	font-weight: bold;
+}
+#login:hover{
+	background-color: #ba7827;
+	color: white;
 }

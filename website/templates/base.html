@@ -13,6 +13,7 @@
         <title>{% block title %}Home{% endblock %}</title>
     </head>
     <body>
+		<!--navigation bar-->
         <nav class="navbar navbar-expand-md navbar-dark">
             <a href="/" class="navbar-brand">LamoJudge</a>
 
@@ -31,11 +32,12 @@
                 <a class="nav-item nav-link" id="problems" href="/problems">Problems</a>
                 <a class="nav-item nav-link" id="submissions" href="/submissions">Submissions</a>
                 <a class="nav-item nav-link" id="contests" href="/contests">Contests</a>
+				<a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
               </div>
             </div>
         </nav>
+		<!--navigation bar ends-->
 
         <div class="container">
           {% block content %}
