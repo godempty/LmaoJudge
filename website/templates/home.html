@@ -1,9 +1,81 @@
+<link rel="stylesheet" href="{{ url_for("static", filename = "css/home.css") }}">
 {% extends "base.html" %} 
 
 {% block title %}LamoJudge{% endblock %}
 
 {% block content %}
 
-<h1>Home page</h1>
+<section>
+	<div class="box" style="width: 99%;">
+		<div class="caption">Announcement</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 15%">Author</th>
+					<th scope="col" style="width: 75%">Title</th>
+					<th scope="col" style="width: 10%">Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>laialan</td>
+					<td>welcome</td>
+					<td>2022/9/8</td>
+				</tr>
+				<tr>
+					<td>momo</td>
+					<td>sup</td>
+					<td>2022/9/8</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<section>
+	<div class="box" style="width: 50%;">
+		<div class="caption">Leader Board</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="box" style="width: 49%;">
+		<div class="caption">New Problems</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</section>
+
+<section>
+	<div class="box" style="width: 50%;">
+		<div class="caption">Upcoming Contest</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="box" style="width: 49%;">
+		<div class="caption">Previous & Current Contest</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</section>
 
 {% endblock %}
