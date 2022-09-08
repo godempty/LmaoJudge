@@ -1,3 +1,6 @@
+body{
+	background-color: lightgrey;
+}
 div.navbar-nav a{
 	border-radius: 9px;
 	color: white;
@@ -36,4 +39,10 @@ nav{
 #login:hover{
 	background-color: #ba7827;
 	color: white;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1600px;
+  }
 }
