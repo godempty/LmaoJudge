@@ -9,6 +9,9 @@ def home():
 @views.route('/problems')
 def problems():
     return render_template("problems.html")
+@views.route('/problems/<id>')
+def problem_page(id):
+    return render_template("problem_page.html", id=id)
 @views.route('/contests')
 def contests():
     return render_template("contests.html")

@@ -46,3 +46,30 @@ nav{
     max-width: 1600px;
   }
 }
+
+/*box displaying main contents*/
+.box{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	border: 2px black solid;
+	border-radius: 7px;
+}
+
+.box *{
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.caption{
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	font-size:x-large;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+table{
+	border-collapse: collapse;
+}
