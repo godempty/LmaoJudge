@@ -14,13 +14,13 @@ div.navbar-nav a:hover{
 }
 
 .navbar-brand{
-	color: white;
+	color: darkorange;
 	font-weight: bold;
 	margin-left: 20px;
 	transition-duration: 0.2s;
 }
 .navbar-brand:hover{
-	color: darkorange;
+	color: white;
 }
 
 nav{
@@ -33,7 +33,7 @@ nav{
 }
 
 #login{
-	color: darkorange;
+	color: lightsalmon;
 	font-weight: bold;
 }
 #login:hover{
@@ -41,7 +41,7 @@ nav{
 	color: white;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .container {
     max-width: 1600px;
   }
@@ -68,8 +68,4 @@ nav{
 	font-size:x-large;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-}
-
-table{
-	border-collapse: collapse;
 }
