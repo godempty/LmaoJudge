@@ -1,4 +1,9 @@
 from flask import Flask
+import pymongo
+
+client = pymongo.MongoClient('localhost', 27017)
+db = client.LmaoJudge
+
 
 def create_app():
     app = Flask(__name__)
@@ -13,3 +18,4 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
 
     return app
+
