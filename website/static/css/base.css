@@ -1,6 +1,21 @@
+:root{
+	--darkerorange: #d9720b;
+}
+
 body{
 	background-color: lightgrey;
 }
+
+.container a:link, .container a:visited{
+	color: var(--darkerorange);
+	text-decoration: none;
+	font-weight:bold;
+	transition-duration: 0.2s;
+}
+.container a:hover{
+	color: darkorange;
+}
+
 div.navbar-nav a{
 	border-radius: 9px;
 	color: white;
