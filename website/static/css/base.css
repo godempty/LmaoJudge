@@ -6,12 +6,14 @@ body{
 	background-color: lightgrey;
 }
 
+
 .container a:link, .container a:visited{
 	color: var(--darkerorange);
 	text-decoration: none;
 	font-weight:bold;
 	transition-duration: 0.2s;
 }
+
 .container a:hover{
 	color: darkorange;
 }
@@ -84,3 +86,4 @@ nav{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
+

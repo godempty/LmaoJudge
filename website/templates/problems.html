@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ url_for("static", filename = "css/problems.css") }}">
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/problems.css') }}">
 {% extends "base.html" %}
 {% block content %}
 
@@ -17,14 +17,14 @@
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>First problem</td>
+                <td><a href="/problems/2">Second problem</a></td>
                 <td>laialan</td>
                 <td>100%(1/1)</td>
                 <td>50%(1/2)</td>
             </tr>
             <tr>
-                <th scope="row" href="/">2</th>
-                <td>Second problem</td>
+                <th scope="row">2</th>
+                <td><a href="/problems/2">Second problem</a></td>
                 <td>momo</td>
                 <td>100%(1/1)</td>
                 <td>1%(1/100)</td>
