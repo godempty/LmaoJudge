@@ -1,21 +1,23 @@
 :root{
-	--darkerorange: #d9720b;
+	--linkcolor: #d9720b;
+	--backcolor: rgba(33, 45, 57, 0.902);
+	--linkhover: darkorange;
 }
 
 body{
-	background-color: lightgrey;
+	background-color: rgba(255, 255, 224, 0.562);
 }
 
-
 .container a:link, .container a:visited{
-	color: var(--darkerorange);
+	color: var(--linkcolor);
 	text-decoration: none;
 	font-weight:bold;
 	transition-duration: 0.2s;
+	text-align: left;
 }
 
 .container a:hover{
-	color: darkorange;
+	color: var(--linkhover);
 }
 
 div.navbar-nav a{
@@ -26,7 +28,7 @@ div.navbar-nav a{
 }
 
 div.navbar-nav a:hover{
-	background-color: #ba7827;
+	background-color: var(--linkcolor);
 	border-radius: 9px;
 }
 
@@ -41,7 +43,7 @@ div.navbar-nav a:hover{
 }
 
 nav{
-	background-color: black;
+	background-color: var(--backcolor);
 	margin-top: 7px;
 	margin-right: 9px;
 	margin-left: 9px;
@@ -54,7 +56,7 @@ nav{
 	font-weight: bold;
 }
 #login:hover{
-	background-color: #ba7827;
+	background-color: var(--linkhover);
 	color: white;
 }
 
@@ -69,17 +71,17 @@ nav{
 	display: inline-block;
 	margin-top: 25px;
 	margin-bottom: 25px;
-	border: 2px black solid;
+	border: 2px var(--backcolor) solid;
 	border-radius: 7px;
 }
 
-.box *{
+.box > div{
 	padding-left: 8px;
 	padding-right: 8px;
 }
 
 .caption{
-	background-color: black;
+	background-color: var(--backcolor);
 	color: white;
 	font-weight: bold;
 	font-size:x-large;
