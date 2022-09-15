@@ -1,7 +1,5 @@
-.list td{
-	border-width: 51px;
+@media (max-width: 550px) {
+	.hid-info{
+		display: none;
+	}
 }
-.list th{
-	border-width: 51px;
-}
-
