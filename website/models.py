@@ -14,3 +14,26 @@ class User:
         user['password'] = pbkdf2_sha256.encrypt(user['password'])
 
         return jsonify(user), 200 
+class Announcement:
+    def add(self):
+        announce= {
+            "author": {
+                'type': 'string',
+                'minlength': 1,
+                'required': True,
+            },
+            "title": {
+                'type': 'string',
+                'minlength': 1,
+                'required': True,
+            },
+            "content": {
+                'type': 'string',
+                'minlength': 1,
+                'required': True,
+            },
+            "time": {
+                'type': 'time',
+                'required': True,
+            }
+        }
