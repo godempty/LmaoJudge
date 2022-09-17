@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template
+from .db import db
 
 views = Blueprint('views', __name__)
 
 # @ is the way to create(define) blueprint
 @views.route('/')
 def home():
-    return render_template("home.html")
+    announce = db['announcements'].find()
+    return render_template("home.html", announce = announce)
 @views.route('/problems')
 def problems():
     return render_template("problems.html")

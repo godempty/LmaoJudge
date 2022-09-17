@@ -17,16 +17,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				{% for data in announce %}
 				<tr>
-					<td>laialan</td>
-					<td><a href='/'>welcome</a></td>
-					<td>2022/9/8</td>
+					<td>{{ data['author'] }}</td>
+					<td><a href='/'>{{ data['title'] }}</a></td>
+					<td>{{ data['time'] }}</td>
 				</tr>
-				<tr>
-					<td>momo</td>
-					<td><a href='/'>sup</a></td>
-					<td>2022/9/8</td>
-				</tr>
+				{% endfor %}
 			</tbody>
 		</table>
 	</div>
