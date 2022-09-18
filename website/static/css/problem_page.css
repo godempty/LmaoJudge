@@ -1,0 +1,28 @@
+h2{
+	padding-top: 10px;
+}
+
+#buttonrow{
+	background-color: var(--linkcolor);
+	border: none;
+}
+
+#buttonrow > button{
+	background-color: transparent;
+	border: none;
+	margin: 5px 5px 5px 5px;
+	padding: 4px 4px 4px 4px;
+	color: white;
+	border-radius: 9px;
+	transition-duration: 0.2s;
+}
+
+#submitbut:hover{
+	background-color: seagreen;
+	border-radius: 9px;
+}
+
+#otherbut:hover{
+	background-color: steelblue;
+	border-radius: 9px;
+}
