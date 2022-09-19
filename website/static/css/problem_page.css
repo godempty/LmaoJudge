@@ -2,24 +2,35 @@ h2{
 	padding-top: 10px;
 }
 
-#buttonrow a{
+#buttonrow{
 	background-color: var(--linkcolor);
-	padding: 7px 7px 7px 7px;
-	margin-right: 10px;
-	margin-top: 10px;
-	color: white;
-	border-radius: 9px;
+	border-radius: 5px;
 	transition-duration: 0.2s;
+	margin-top: 25px;
+}
+
+#buttonrow a{
+	background-color: transparent;
+	color: white;
+	padding: 5px 5px 5px 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+	border-radius: 5px;
 }
 
 @media (max-width: 450px){
+	#buttonrow{
+		background-color: transparent;
+	}
 	#buttonrow a{
-		width: 98%;
+		background-color: var(--linkcolor);
+		width: 99%;
+		margin: 5 0 5 0;
 	}
 }
 
 #buttonrow a:hover{
-	border-radius: 9px;
+	border-radius: 5px;
 }
 
 #submitbut:hover{
