@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Sign up page {% endblock %}
 {% block content %}
 <form name="signup" method="POST">
-    <h1 align="center">Sign Up</h1>
+    <h1 align="center" style="margin-top: 20px;">Sign Up</h1>
     <div class="form-group" style="margin-bottom: 1.5%;">
         <label for="name" style="margin-bottom: 1%;">Name </label>
         <input 
@@ -43,6 +43,7 @@
         />
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-primary">Sign Up</button><br>
+	<div style="margin-top: 9px;"><a href="/login">Login Page</a></div>
 </form>
 {% endblock %}
