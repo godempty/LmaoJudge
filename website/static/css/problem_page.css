@@ -65,8 +65,3 @@ h2{
 		width: 98%;
 	}
 }
-
-/*copy button*/
-.tocopy input{
-	transition-duration: 0.5s;
-}
