@@ -7,7 +7,7 @@
 <h2>2. name_of_the_problem</h2>
 <div class="two_col_80" style="display: inline-block; vertical-align: top;">
 	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%;">
-		<a id="submitbut" href="/">Submit</a>
+		<a id="submitbut" href="/submit/{{ pid }}">Submit</a>
 		<a id="allsubbut" href="/">All Submission</a>
 		<a id="mysubbut" href="/">My Submission</a>
 		<a id="rankbut" href="/">Rank</a>
@@ -35,16 +35,16 @@
 	</div>
 
 	<div class="box two_col_half">
-		<div class="caption">Sample Input 1 <input type="button" value="copy"></div>
+		<div class="caption tocopy">Sample Input 1 <input type="button" value="copy"></div>
 		<div>
 			123123123
 		</div>
 	</div>
 
 	<div class="box two_col_half">
-		<div class="caption">Sample Output 1 <input type="button" value="copy"></div>
+		<div class="caption tocopy">Sample Output 1 <input type="button" value="copy"></div>
 		<div>
-			owief
+			lol
 		</div>
 	</div>
 </div>
@@ -72,4 +72,24 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	const copybtn = document.querySelectorAll('.tocopy input')
+	const tt = document.querySelectorAll('.tocopy + div')
+	for(let i = 0; i < copybtn.length; i++){
+		copybtn[i].addEventListener('click', function() {
+			const range = document.createRange()
+			range.selectNode(tt[i])
+			const select = window.getSelection()
+			select.removeAllRanges()
+			select.addRange(range)
+			document.execCommand('copy')
+			select.removeAllRanges()
+			copybtn[i].value = "copied"
+			setTimeout(function() {
+				copybtn[i].value = "copy"
+			}, 800)
+		})
+	}
+</script>
 {% endblock %}
