@@ -1,48 +1,17 @@
 <link rel="stylesheet" href="{{ url_for("static", filename = "css/problem_page.css") }}">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% extends "base.html" %}
 {% block content %}
 
-<h2>2. name_of_the_problem</h2>
-<div class="box" id="buttonrow" style="width: 98%;">
-	<button id="submitbut">submit</button>
-	<button id="otherbut">status</button>
-	<button id="otherbut">my submission</button>
-</div>
 
-<div class="box" style="width: 98%;">
-	<div class="caption">Statement</div>
-	<div>
-		test statement \(dp[i]\)
-	</div>
-</div>
 
-<div class="box" style="width: 49%;">
-	<div class="caption">Input</div>
-	<div>
-		10
-	</div>
-</div>
+<h2>{{ id }}. name_of_the_problem</h2>
 
-<div class="box" style="width: 49%;">
-	<div class="caption">Output</div>
-	<div>
-		123<br>nl
-	</div>
-</div>
+<hr>
 
-<div class="box" style="width: 49%;">
-	<div class="caption">Sample Input</div>
-	<div>
-		123123123
-	</div>
-</div>
+<div class="content">bla bla bla la</div>
 
-<div class="box" style="width: 49%;">
-	<div class="caption">Sample Output</div>
-	<div>
-		owief
-	</div>
-</div>
+<h4>Input</h4>
+
+<h4>Output</h4>
+
 {% endblock %}
