@@ -74,9 +74,10 @@ nav{
 	margin-bottom: 25px;
 	border: 2px var(--backcolor) solid;
 	border-radius: 7px;
+	vertical-align: top;
 }
 
-.box > div{
+.box > div:not(.caption){
 	padding-left: 8px;
 	padding-right: 8px;
 }
@@ -88,5 +89,34 @@ nav{
 	font-size:x-large;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding-left: 8px;
 }
 
+.caption input{
+	background-color: transparent;
+	color: white;
+	border: none;
+	padding: 0 0 0 0;
+	font-size: medium;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-top-right-radius: 5px;
+	transition-duration: 0.1s;
+}
+
+.caption input:hover{
+	background-color:dimgrey;
+}
+
+/*config for two column box*/
+.two_col_half{
+	width: 49%;
+}
+
+@media (max-width: 800px) {
+	.two_col_half {
+		width: 98%;
+	}
+}

@@ -1,9 +1,0 @@
-.two_col{
-	width: 49%;
-}
-
-@media (max-width: 800px) {
-	.two_col {
-		width: 98%;
-	}
-}
