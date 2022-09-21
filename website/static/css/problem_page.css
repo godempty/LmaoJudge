@@ -2,51 +2,46 @@ h2{
 	padding-top: 10px;
 }
 
+/* buttonrow styles*/
 #buttonrow{
-	background-color: var(--linkcolor);
-	border-radius: 5px;
 	transition-duration: 0.2s;
-	margin-top: 25px;
-	padding-top: 3px;
-	padding-bottom: 3px;
+	padding-top: 0px;
+	border-top: 1px solid lightgrey;
 }
-
 #buttonrow a{
-	background-color: transparent;
-	color: white;
-	padding: 5px 5px 5px 5px;
-	margin-right: 10px;
-	margin-left: 10px;
-	border-radius: 5px;
+	/*background-color: #cfcfba;*/
+	color: var(--linkcolor);
+	padding: 5px 15px 5px 15px;
+	margin: 0 0 0 0;
+	border-left: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
 }
-
-@media (max-width: 450px){
-	#buttonrow{
-		background-color: transparent;
-	}
+#submitbut{
+	border-bottom-left-radius: 5px;
+}
+#rankbut{
+	border-right: 1px solid lightgrey;
+	border-bottom-right-radius: 5px;
+}
+@media (max-width: 500px){
 	#buttonrow a{
-		background-color: var(--linkcolor);
-		width: 99%;
-		margin: 5 0 5 0;
+		width: 100%;
+		margin: 0 0 0 0;
+		border: 1px solid lightgrey;
+		border-top: 0;
+	}
+	#submitbut{
+		border-bottom-left-radius: 0;
+	}
+	#rankbut{
+		border-bottom-left-radius: 5px;
 	}
 }
-
 #buttonrow a:hover{
-	border-radius: 5px;
+	background-color: var(--linkcolor);
+	color: white;
 }
-
-#submitbut:hover{
-	background-color: seagreen;
-}
-#allsubbut:hover{
-	background-color: steelblue;
-}
-#mysubbut:hover{
-	background-color: cadetblue;
-}
-#rankbut:hover{
-	background-color: firebrick;
-}
+/* buttonrow styles end*/
 
 .two_col_80{
 	width: 80%;
