@@ -1,38 +1,63 @@
 {% extends "base.html" %} {% block title %}Add announcement {% endblock %}
 {% block content %}
-<form name="addannounce" method="POST">
-    <h1 align="center">Add Announcement</h1>
-    <div class="form-group" style="margin-bottom: 1.5%;">
-        <label for="author" style="margin-bottom: 1%;">Author </label>
-        <input 
-            type="author"
-            class="form-control" 
-            id="author" 
-            name="author" 
-            placeholder="author"
-        />
-    </div>
-    <div class="form-group" style="margin-bottom: 1.5%;">
-        <label for="title" style="margin-bottom: 1%;">title </label>
-        <input 
-            type="title"
-            class="form-control" 
-            id="title" 
-            name="title" 
-            placeholder="title"
-        />
-    </div>
-    <div class="form-group" style="margin-bottom: 1.5%;">
-        <label for="context" style="margin-bottom: 1%;">Context </label>
-        <input 
-            type="context"
-            class="form-control" 
-            id="context" 
-            name="context" 
-            placeholder="Enter context"
-        />
-    </div>
+<div>
+    <form style="width: 98%;" class="box" name="addannounce" method="POST">
+        <div class="caption">Add Announcement</div>
+        <div class="form-group" style="margin-bottom: 1.5%;">
+            <label for="author" style="margin-bottom: 1%;">Author </label>
+            <input 
+                type="author"
+                class="form-control" 
+                id="author" 
+                name="author" 
+                placeholder="author"
+            />
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5%;">
+            <label for="title" style="margin-bottom: 1%;">title </label>
+            <input 
+                type="title"
+                class="form-control" 
+                id="title" 
+                name="title" 
+                placeholder="title"
+            />
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5%;">
+            <label for="context" style="margin-bottom: 1%;">Context </label>
+            <input 
+                type="context"
+                class="form-control" 
+                id="context" 
+                name="context" 
+                placeholder="Enter context"
+            />
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<div class="box" style="width: 98%;">
+	<div class="caption">Announcement</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 15%">Author</th>
+					<th scope="col" style="width: 75%">Title</th>
+					<th scope="col" style="width: 10%">Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for data in announce %}
+				<tr>
+					<td>{{ data['author'] }}</td>
+					<td><a href='/'>{{ data['title'] }}</a></td>
+					<td>{{ data['time'] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
 {% endblock %}

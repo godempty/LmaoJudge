@@ -10,6 +10,7 @@ def home():
 
 @admin.route('/addannounce', methods=['POST','GET'])
 def addannounce():
+    announce = db['announcements'].find()
     if request.method == 'POST':
         today =datetime.utcnow()
         announcement = {
@@ -18,8 +19,8 @@ def addannounce():
             'time': today,
             'author': request.form.get('author')
         }
-        result = db['announcements'].insert_one(announcement)
-    return render_template("addannounce.html")
+        db['announcements'].insert_one(announcement)
+    return render_template("addannounce.html", announce = announce)
 @admin.route('/addproblems')
 def addproblems():
     return render_template("addproblems.html")
