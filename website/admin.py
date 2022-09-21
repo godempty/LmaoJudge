@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from flask import Blueprint, render_template, request, redirect
+from bson.objectid import ObjectId
 from .db import db
 
 admin = Blueprint('admin', __name__)
@@ -24,3 +25,8 @@ def addannounce():
 @admin.route('/addproblems')
 def addproblems():
     return render_template("addproblems.html")
+
+@admin.route('/delete/<id1>')
+def delete(id1):
+    db['announcements'].delete_one({"_id": ObjectId(id1)})
+    return redirect('/admin/addannounce')

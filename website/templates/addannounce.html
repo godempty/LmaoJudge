@@ -44,8 +44,9 @@
 			<thead>
 				<tr>
 					<th scope="col" style="width: 15%">Author</th>
-					<th scope="col" style="width: 75%">Title</th>
+					<th scope="col" style="width: 65%">Title</th>
 					<th scope="col" style="width: 10%">Time</th>
+                    <th scope="col" style="width: 10%">move</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +55,7 @@
 					<td>{{ data['author'] }}</td>
 					<td><a href='/'>{{ data['title'] }}</a></td>
 					<td>{{ data['time'] }}</td>
+                    <td><a class="btn btn-danger" href="/admin/delete/{{ data['_id'] }}">Delete</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
