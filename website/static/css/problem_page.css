@@ -1,5 +1,13 @@
 h2{
 	padding-top: 10px;
+	display: inline-block;
+}
+#id_box{
+	display: inline-block;
+	background-color: green;
+	padding: 0 10 0 10;
+	border-radius: 5px;
+	color: white;
 }
 
 /* buttonrow styles*/
