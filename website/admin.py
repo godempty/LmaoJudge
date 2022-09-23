@@ -13,20 +13,22 @@ def home():
 def addannounce():
     announce = db['announcements'].find()
     if request.method == 'POST':
-        today =datetime.utcnow()
+        today =datetime.now()
         announcement = {
             'title': request.form.get('title'),
             'context': request.form.get('context'),
-            'time': today,
+            'time': f"{today.year}/{today.month}/{today.day}",
             'author': request.form.get('author')
         }
+
         db['announcements'].insert_one(announcement)
-    return render_template("addannounce.html", announce = announce)
+    return render_template("announcescontrol.html", announce = announce)
+
 @admin.route('/addproblems')
 def addproblems():
     return render_template("addproblems.html")
 
-@admin.route('/delete/<id1>')
+@admin.route('/announcedelete/<id1>')
 def delete(id1):
     db['announcements'].delete_one({"_id": ObjectId(id1)})
     return redirect('/admin/addannounce')

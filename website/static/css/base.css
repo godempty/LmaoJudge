@@ -82,6 +82,10 @@ nav{
 	padding-right: 8px;
 }
 
+.box > button{
+	justify-content: space-between;
+}
+
 .caption{
 	background-color: var(--backcolor);
 	color: white;
