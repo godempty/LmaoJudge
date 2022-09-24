@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Admin Page{% endblock %}
+{% block content %}
+{% if session %}
+    {% if session['user']['admin'] == true %}
+        {% block admincontent %}
+        {% endblock %}
+    {% else %}
+        <h1 style="text-align: center; margin-top:20%; font-size: 600%;">
+            此頁面僅供管理員觀看 <br>
+            請檢查自己是否有登入
+        </h1>
+    {% endif %}
+{% endif %}
+{% endblock %}

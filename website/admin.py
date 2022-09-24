@@ -7,7 +7,7 @@ admin = Blueprint('admin', __name__)
 
 @admin.route('/')
 def home():
-    return render_template("admin.html")
+    return render_template("admin/control_list.html")
 
 @admin.route('/addannounce', methods=['POST','GET'])
 def addannounce():
@@ -22,11 +22,11 @@ def addannounce():
         }
 
         db['announcements'].insert_one(announcement)
-    return render_template("announcescontrol.html", announce = announce)
+    return render_template("admin/announcescontrol.html", announce = announce)
 
 @admin.route('/addproblems')
 def addproblems():
-    return render_template("addproblems.html")
+    return render_template("admin/problemscontrol.html")
 
 @admin.route('/announcedelete/<id1>')
 def delete(id1):

@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, flash
+import re
+from flask import Blueprint, render_template, request, flash, session, redirect
 from .db import db 
-
+from bson import json_util
+import json
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -13,18 +15,22 @@ def login():
         elif len(password) < 7 : 
             flash('密碼必須至少有7個字', category='error')
         else:
-            allaccount = db['account'].find()
+            allaccount = db['account']
             account = allaccount.find_one({'email': email})
             if account['password'] != password:
                 flash('密碼錯誤!', category='error')
             else:
+                session['logged']=True
+                session['user'] = json.loads(json_util.dumps(account))
                 flash('登入成功!',category='success')
-    
-    return render_template("login.html", boolean = True)
+                return redirect('/')
+    return render_template("login.html")
 
-@auth.route('/logout')
+@auth.route('/log-out')
 def logout():
-    return "<p>logout</p>"
+    session['user'] = False
+    session['logged'] = False
+    return redirect('/')
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def signup():
@@ -51,9 +57,9 @@ def signup():
                 'name': name,
                 'email': email,
                 'password': password1,
-                'admin': 0,
+                'admin': False,
             }
             allaccount.insert_one(newaccount)
             flash('註冊成功!',category='success')
         
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", logged = session['logged'])

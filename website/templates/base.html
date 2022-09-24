@@ -32,11 +32,22 @@
 					<a class="nav-item nav-link" id="problems" href="/problems">Problems</a>
 					<a class="nav-item nav-link" id="submissions" href="/submissions">Submissions</a>
 					<a class="nav-item nav-link" id="contests" href="/contests">Contests</a>
+                    {% if session['user'] %}
+                        {% if session['user']['admin'] == true %}
+                            <a class="nav-item nav-link" id="Admin" href="/admin">Admin</a>
+                        {% endif %}
+                    {% endif %}
 				</div>
-				<div class="navbar-nav ms-auto">
-					<a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-					<a class="nav-item nav-link" id="login" href="/login">Login</a>
-				</div>
+                {% if session['logged'] == True %}
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-item nav-link" id="signOut" href="/log-out">Log Out</a>
+                </div>
+                {% else %}
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                        <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                    </div>
+                {% endif %}
             </div>
         </nav>
 		<!--navigation bar ends-->

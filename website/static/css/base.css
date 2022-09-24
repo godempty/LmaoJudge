@@ -27,7 +27,9 @@ div.navbar-nav a{
 	margin-right: 10px;
 	margin-left: 5px;
 }
-
+#admin {
+	color: red;
+}
 div.navbar-nav a:hover{
 	background-color: var(--linkcolor);
 	border-radius: 9px;
