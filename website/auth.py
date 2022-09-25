@@ -61,5 +61,6 @@ def signup():
             }
             allaccount.insert_one(newaccount)
             flash('註冊成功!',category='success')
+            redirect('/')
         
     return render_template("sign_up.html", logged = session['logged'])
