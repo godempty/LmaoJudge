@@ -126,3 +126,27 @@ nav{
 		width: 98%;
 	}
 }
+
+.submit-box {
+	display: block;
+	margin: auto;
+	margin-top: 25px;
+	width: 70%;
+}
+.submit-form {
+	margin: 0.25em;
+}
+.submit-space{
+	margin-left: 1vw;
+}
+.code-area{
+	height: 50vh;
+	margin-bottom: 1vh;
+}
+.choose {
+	display: inline-flex;
+	align-items: stretch;
+}
+textarea[name=code]{
+	resize: none;
+}

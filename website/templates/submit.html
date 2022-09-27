@@ -1,9 +1,19 @@
 {% extends "base.html" %}
+{% block title %} Submit {% endblock %}
 {% block content %}
-<div class="box">
-	<form class="form-group"action="/submit" method="post">
-		<textarea class="form-control" type="text" name="code"></textarea>
-		<input type="submit" value="submit code">
+<div class="box submit-box">
+	<form class="form-group submit-form" action="/submit" method="post">
+		<textarea class="form-control code-area" type="text" name="code"></textarea>
+		<div class="choose">
+			<select style="border-radius: 5px;">
+				<option value="">選擇你的程式語言</option>
+				<option value="c++">c++</option>
+				<option value="c">c(not done)</option>
+				<option value="python">python(not done)</option>
+			</select>
+			<div class = "submit-space"></div>
+			<input class="btn btn-outline-secondary" type="submit" value="submit code">
+		</div>
 	</form>
 </div>
 {% endblock %}
