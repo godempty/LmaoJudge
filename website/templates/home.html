@@ -20,7 +20,7 @@
 				{% for data in announce %}
 				<tr>
 					<td>{{ data['author'] }}</td>
-					<td><a href='/'>{{ data['title'] }}</a></td>
+					<td><a href='/announce/{{data["_id"]}}'>{{ data['title'] }}</a></td>
 					<td>{{ data['time'] }}</td>
 				</tr>
 				{% endfor %}

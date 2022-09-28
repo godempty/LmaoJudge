@@ -29,6 +29,7 @@ def login():
 @auth.route('/log-out')
 def logout():
     session['user'] = False
+    session['ann'] = False
     session['logged'] = False
     return redirect('/')
 

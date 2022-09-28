@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from bson.objectid import ObjectId
 from .db import db
 
@@ -18,7 +18,7 @@ def addannounce():
             'title': request.form.get('title'),
             'context': request.form.get('context'),
             'time': f"{today.year}/{today.month}/{today.day}",
-            'author': request.form.get('author')
+            'author': session['user']['name'],
         }
 
         db['announcements'].insert_one(announcement)

@@ -1,44 +1,31 @@
 {% extends "admin/admin.html" %} 
 {% block title %} Announcements Setting {% endblock %}
 {% block admincontent %}
-<div>
-    <form style="width: 98%;" class="box" name="addannounce" method="POST">
-        <div class="caption">New Announcement</div>
-        <div class="form-group" style="margin-bottom: 1.5%; margin-top: 1.5%;">
-            <input 
-                type="author"
-                class="form-control" 
-                id="author" 
-                name="author" 
-                placeholder="author"
-            />
-        </div>
-        <div class="form-group" style="margin-bottom: 1.5%;">
-            <input 
-                type="title"
-                class="form-control" 
-                id="title" 
-                name="title" 
-                placeholder="title"
-                required
-            />
-        </div>
-        <div class="form-group" style="margin-bottom: 1.5%;">
-            <input 
-                type="context"
-                class="form-control" 
-                id="context" 
-                name="context" 
-                placeholder="Enter context"
-                required
-            />
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="justify-content: space-between ">Submit</button>
+<div class="box add-box">
+    <div class="caption">New Announcement</div>
+    <form class="form-group add-form" name="addannounce" method="POST">
+        <input 
+            type="title"
+            class="form-control" 
+            style="margin-top: 0.7%;"
+            id="title" 
+            name="title" 
+            placeholder="title"
+            required
+        />
+        <textarea
+            type="context"
+            class="form-control announce-text"
+            id="context" 
+            name="context" 
+            placeholder="Enter context"
+            required
+        ></textarea>
+        <button style="margin-top: 0.7%;" type="submit" class="btn btn-dark">Add Announcement </button>
     </form>
 </div>
 
-<div class="box" style="width: 98%;">
+<div class="box add-box">
 	<div class="caption">Announcement List</div>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -46,14 +33,14 @@
 				<th scope="col" style="width: 15%">Author</th>
 				<th scope="col" style="width: 65%">Title</th>
 				<th scope="col" style="width: 10%">Time</th>
-                   <th scope="col" style="width: 10%">Function</th>
+                <th scope="col" style="width: 10%">Function</th>
 			</tr>
 		</thead>
 	    <tbody>
 			{% for data in announce %}
 			<tr>
 				<td>{{ data['author'] }}</td>
-				<td><a href='/'>{{ data['title'] }}</a></td>
+				<td><a href='/announce/{{ data["_id"] }}'>{{ data['title'] }}</a></td>
 				<td>{{ data['time'] }}</td>
                 <td><a class="btn btn-danger" href="/admin/announcedelete/{{ data['_id'] }}">Delete</a></td>
 				</tr>

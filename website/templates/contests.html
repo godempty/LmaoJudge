@@ -1,6 +1,20 @@
 {% extends "base.html" %}
+{% block title %} Contests {% endblock %}
 {% block content %}
-
-<h1>Contests</h1>
-
+<div class="box" style="width: 100%;">
+	<div class="caption">Contests</div>
+    <table class="table table-striped table-hover">
+        <thead class="thead-light" style="font-weight: bold;">
+        </thead>
+        <tbody>
+            {% for i in range(0,51) %}
+                <tr>
+                    <th>
+                        <p>Laialan Orz 他打爆我第{{ i }}次了</p>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

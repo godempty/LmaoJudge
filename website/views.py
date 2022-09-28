@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from .db import db
-
+from bson.objectid import ObjectId
+from bson import json_util
+import json
 views = Blueprint('views', __name__)
 # @ is the way to create(define) blueprint
 @views.route('/')
@@ -15,7 +17,6 @@ def problem_page(id):
     return render_template("problem_page.html", pid=id)
 @views.route('/contests')
 def contests():
-
     return render_template("contests.html")
 @views.route('/submissions')
 def submissions():
@@ -33,3 +34,11 @@ def getcode():
         return render_template("submissions.html")
     else:
         return 'error'
+@views.route('/announce/<id>')
+def getannounce(id):
+    ann = db['announcements'].find_one({"_id": ObjectId(id)})
+    session['ann'] = json.loads(json_util.dumps(ann))
+    return redirect('/announce')
+@views.route('/announce')
+def showannounce():
+    return render_template('announcement.html')

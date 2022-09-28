@@ -92,7 +92,7 @@ nav{
 	background-color: var(--backcolor);
 	color: white;
 	font-weight: bold;
-	font-size:x-large;
+	font-size: xx-large;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	display: flex;
@@ -130,7 +130,7 @@ nav{
 .submit-box {
 	display: block;
 	margin: auto;
-	margin-top: 25px;
+	margin-top: 3%;
 	width: 70%;
 }
 .submit-form {
@@ -147,6 +147,37 @@ nav{
 	display: inline-flex;
 	align-items: stretch;
 }
-textarea[name=code]{
+.add-box {
+	display: block;
+	margin: auto;
+	margin-top: 3%;
+}
+.add-form {
+	margin: 0.3em 0.5em 0.3em 0.5em;
+}
+.announce-text {
+	margin-top: 0.7%;
+	height: 100%;
+	font-size: 30px;
+}
+.announce-box{
+	width: 100%;
+	height: 60vh;
+}
+.announce-space{
+	height: 1%;
+}
+.announce-context {
+	display: flex;
+	padding-left: 2.5%;
+	height: auto;
+	font-size: 30px;
+}
+.announce-caption{
+	font-size: 45px;
+	padding-left: 0.5%;
+}
+textarea{
 	resize: none;
+	white-space: pre-wrap;
 }
