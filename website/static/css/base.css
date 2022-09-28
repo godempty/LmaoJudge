@@ -157,12 +157,12 @@ nav{
 }
 .announce-text {
 	margin-top: 0.7%;
-	height: 100%;
-	font-size: 30px;
+	height: 30vh;
+	font-size: 20px;
 }
 .announce-box{
 	width: 100%;
-	height: 60vh;
+	height: 80vh;
 }
 .announce-space{
 	height: 1%;
