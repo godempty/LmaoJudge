@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="verdict">testing</div>
+
+<script type="text/javascript">
+
+const doneupd = document.getElementById('verdict')
+
+var upd = setInterval(function(){
+	var req = new XMLHttpRequest()
+	req.open('GET', window.location.href+'/get_data')
+	req.onreadystatechange = function(){
+		if(req.readyState == 4){
+			ret = JSON.parse(req.responseText)
+			if(ret.done == 1){
+				doneupd.innerText = ret.finalverdict
+				clearInterval(upd)
+				alert('done')
+			}
+		}
+	}
+	req.send()
+}, 100)
+
+</script>
+
+{% endblock %}

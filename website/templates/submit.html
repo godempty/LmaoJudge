@@ -2,11 +2,11 @@
 {% block title %} Submit {% endblock %}
 {% block content %}
 <div class="box submit-box">
-	<form class="form-group submit-form" action="/submit" method="post">
+	<form class="form-group submit-form" action="/submit/{{ id }}" method="post">
 		<textarea class="form-control code-area" type="text" name="code"></textarea>
 		<div class="choose">
-			<select style="border-radius: 5px;">
-				<option value="">選擇你的程式語言</option>
+			<select style="border-radius: 5px;" name="lang">
+				<option value="none">選擇你的程式語言</option>
 				<option value="c++">c++</option>
 				<option value="c">c(not done)</option>
 				<option value="python">python(not done)</option>
