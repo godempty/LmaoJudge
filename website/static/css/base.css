@@ -92,7 +92,7 @@ nav{
 	background-color: var(--backcolor);
 	color: white;
 	font-weight: bold;
-	font-size: xx-large;
+	font-size: x-large;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	display: flex;
@@ -108,7 +108,7 @@ nav{
 	font-size: medium;
 	padding-right: 4px;
 	padding-left: 4px;
-	border-top-right-radius: 5px;
+	border-radius: 5px;
 	transition-duration: 0.1s;
 }
 
@@ -176,6 +176,22 @@ nav{
 .announce-caption{
 	font-size: 45px;
 	padding-left: 0.5%;
+}
+.problem-text{
+	margin-top: 0.7%;
+	height: 20vh;
+	
+}
+
+.io-format {
+	margin-top: 0.7%;
+	
+}
+.io-f{
+	display: flex;
+}
+.io-f-space{
+	width: 2.5%;
 }
 textarea{
 	resize: none;

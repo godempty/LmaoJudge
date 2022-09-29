@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from flask import Blueprint, render_template, request, redirect, session
 from bson.objectid import ObjectId
+from .model import new_problem
 from .db import db
 
 admin = Blueprint('admin', __name__)
@@ -24,8 +25,11 @@ def addannounce():
         db['announcements'].insert_one(announcement)
     return render_template("admin/announcescontrol.html", announce = announce)
 
-@admin.route('/addproblems')
+@admin.route('/addproblems', methods=['POST','GET'])
 def addproblems():
+    if request.method == 'POST':
+        problem = new_problem(request)
+        db['problems'].insert_one(problem)
     return render_template("admin/problemscontrol.html")
 
 @admin.route('/announcedelete/<id1>')
