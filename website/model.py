@@ -3,9 +3,10 @@ from flask import session
 from .db import db
 def new_problem(request):
     cnt = db['count'].find_one({"name": "problem"})
-    cnt['count']+=1
+    count = cnt['count']+1
+    db['count'].update_one({"name": "problem"}, {"$set":{"count": count}})
     problem = {
-        "id": cnt['count'],
+        "id": count,
         "tag": request.form.get('tag'),
         "topcoder": "none", #
         "record": 0, #to check topcoder
@@ -15,7 +16,7 @@ def new_problem(request):
         "description": request.form.get('description'),
         "i_format": request.form.get('i_format'), #input format
         "o_format": request.form.get('o_format'), #output format
-        "samples": request.form.get('sample'),
+        "samples": request.form.getlist('sample'),
         "hint": request.form.get('hint'),
         "t_limit": request.form.get('t_limit'), #time limit
         "m_limit": request.form.get('m_limit'), #memory limit

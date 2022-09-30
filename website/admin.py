@@ -29,7 +29,8 @@ def addannounce():
 def addproblems():
     if request.method == 'POST':
         problem = new_problem(request)
-        db['problems'].insert_one(problem)
+        print(problem)
+        #db['problems'].insert_one(problem)
     return render_template("admin/problemscontrol.html")
 
 @admin.route('/announcedelete/<id1>')
