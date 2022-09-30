@@ -127,26 +127,6 @@ nav{
 	}
 }
 
-.submit-box {
-	display: block;
-	margin: auto;
-	margin-top: 3%;
-	width: 70%;
-}
-.submit-form {
-	margin: 0.25em;
-}
-.submit-space{
-	margin-left: 1vw;
-}
-.code-area{
-	height: 50vh;
-	margin-bottom: 1vh;
-}
-.choose {
-	display: inline-flex;
-	align-items: stretch;
-}
 .add-box {
 	display: block;
 	margin: auto;

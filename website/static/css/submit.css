@@ -1,0 +1,13 @@
+.submit-box {
+	margin: auto;
+	margin-top: 25px;
+	width: 70%;
+}
+#code-area{
+	height: 50vh;
+	margin-bottom: 1vh;
+}
+#choose {
+	display: inline-flex;
+	align-items: stretch;
+}
