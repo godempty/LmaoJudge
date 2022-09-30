@@ -24,7 +24,7 @@ def login():
                 session['user'] = json.loads(json_util.dumps(account))
                 flash('登入成功!',category='success')
                 return redirect('/')
-    return render_template("login.html")
+    return render_template("auth/login.html")
 
 @auth.route('/log-out')
 def logout():
@@ -64,4 +64,4 @@ def signup():
             flash('註冊成功!',category='success')
             redirect('/')
         
-    return render_template("sign_up.html", logged = session['logged'])
+    return render_template("auth/sign_up.html", logged = session['logged'])
