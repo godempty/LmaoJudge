@@ -29,7 +29,8 @@ def addannounce():
 def addproblems():
     if request.method == 'POST':
         problem = new_problem(request)
-        print(problem)
+        print(request.form)
+        print(request.form.getlist('sample[]'))
         #db['problems'].insert_one(problem)
     return render_template("admin/problemscontrol.html")
 

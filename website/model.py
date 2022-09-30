@@ -16,7 +16,7 @@ def new_problem(request):
         "description": request.form.get('description'),
         "i_format": request.form.get('i_format'), #input format
         "o_format": request.form.get('o_format'), #output format
-        "samples": request.form.getlist('sample'),
+        "sample": request.form.getlist('sample[]'),
         "hint": request.form.get('hint'),
         "t_limit": request.form.get('t_limit'), #time limit
         "m_limit": request.form.get('m_limit'), #memory limit

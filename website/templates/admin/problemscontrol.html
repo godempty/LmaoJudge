@@ -1,9 +1,10 @@
 {% extends "admin/admin.html" %} 
 {% block title %} Problems Add {% endblock %}
 {% block admincontent %}
+
 <div class="box add-box">
     <div class="caption">New Problem</div>
-    <form class="form-group add-form" name="addannounce" method="POST">
+    <form class="form-group add-form problem-form" id="add-problem" name="addannounce" method="POST">
         <input 
             type="text"
             class="form-control" 
@@ -39,22 +40,24 @@
         <div class="io-f">
             <textarea 
                 type="text"
-                class="form-control io-format"
-                name="sample[]"
+                class="form-control io-format samples"
+                name="sample[0]"
                 placeholder="input sample "
                 required
             ></textarea>
             <div class="io-f-space"></div>
             <textarea 
                 type="text"
-                class="form-control io-format"
-                name="sample[]"
+                class="form-control io-format samples"
+                name="sample[1]"
                 placeholder="output sample"
                 required
             ></textarea>
         </div>
         <button style="margin-top: 0.7%;" type="submit" class="btn btn-dark">ADD</button>
     </form>
+    <script>
+    </script>
 </div>
 
 
