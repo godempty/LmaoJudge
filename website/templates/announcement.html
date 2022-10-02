@@ -2,8 +2,7 @@
 {% block title %} {{session['ann']['title']}} {% endblock %}
 {% block content %}
 <div class="box announce-box">
-    <div class="caption announce-caption">{{ session['ann']['title'] }}</div>
-    <div class="announce-space"></div>
+    <div class="caption" style="font-size: xx-large;">{{ session['ann']['title'] }}</div>
     <pre class="announce-context">{{ session['ann']['context'] }}</pre>
 </div>
 {% endblock %}

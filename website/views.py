@@ -56,7 +56,7 @@ def getannounce(id):
 def showannounce():
     return render_template('announcement.html')
 
-@views.route('/submissions/<id>', methods = ['POST', 'GET'])
+@views.route('/submissions/<id>')
 def single_submission(id):
     return render_template("single_submission.html", id=id)
 

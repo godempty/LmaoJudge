@@ -115,26 +115,64 @@ nav{
 .caption input:hover{
 	background-color:dimgrey;
 }
+/*box displaying main contents end*/
 
 /*config for two column box*/
 .two_col_half{
+	display: inline-block;
+	vertical-align: top;
 	width: 49%;
 }
-
 @media (max-width: 800px) {
 	.two_col_half {
 		width: 98%;
 	}
 }
+.two_col_80{
+	display: inline-block;
+	vertical-align: top;
+	width: 80%;
+}
+.two_col_20{
+	display: inline-block;
+	vertical-align: top;
+	width: 19%;
+}
+.two_col_20 > div{
+	width: 99%;
+}
+@media (max-width: 1000px){
+	.two_col_80{
+		width: 98%;
+	}
+	.two_col_20{
+		width: 98%;
+	}
+}
+.two_col_70{
+	display: inline-block;
+	vertical-align: top;
+	width: 75%;
+}
+.two_col_30{
+	display: inline-block;
+	vertical-align: top;
+	width: 24%;
+}
+.two_col_30 > div{
+	width: 99%;
+}
+@media (max-width: 1000px){
+	.two_col_70{
+		width: 98%;
+	}
+	.two_col_30{
+		width: 98%;
+	}
+}
+/*config for two column box end*/
 
-.add-box {
-	display: block;
-	margin: auto;
-	margin-top: 3%;
-}
-.add-form {
-	margin: 0.3em 0.5em 0.3em 0.5em;
-}
+/*config for announce*/
 .announce-text {
 	margin-top: 0.7%;
 	height: 30vh;
@@ -144,28 +182,27 @@ nav{
 	width: 100%;
 	height: 80vh;
 }
-.announce-space{
-	height: 1%;
-}
 .announce-context {
-	display: flex;
-	padding-left: 2.5%;
-	height: auto;
+	padding-left: 20px;
 	font-size: 30px;
 }
-.announce-caption{
-	font-size: 45px;
-	padding-left: 0.5%;
+/*config for announce end*/
+
+/* admin page*/
+.add-box {
+	display: block;
+	margin: auto;
+	margin-top: 3%;
+}
+.add-form {
+	margin: 0.3em 0.5em 0.3em 0.5em;
 }
 .problem-text{
 	margin-top: 0.7%;
 	height: 20vh;
-	
 }
-
 .io-format {
 	margin-top: 0.7%;
-	
 }
 .io-f{
 	display: flex;
@@ -173,7 +210,29 @@ nav{
 .io-f-space{
 	width: 2.5%;
 }
+/* admin page end*/
+
 textarea{
 	resize: none;
 	white-space: pre-wrap;
 }
+
+/* codeblock from single submission page*/
+.codeblock{
+	width: 99%;
+	margin-top: 25px;
+}
+.codeblock pre{
+	counter-reset: line;
+	padding-left: 7px;
+	border-radius: 7px;
+}
+.codeblock code:before{
+	counter-increment: line;
+	content: counter(line);
+	display: inline-block;
+	border-right: 2px solid var(--linkcolor);
+	padding-right: 3px;
+	margin-right: 7px;
+}
+/* codeblock from single submission page end*/

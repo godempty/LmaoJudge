@@ -1,14 +1,48 @@
+<script
+	type="text/javascript"
+	src="{{ url_for('static', filename='js/prism.js') }}"
+></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prism.css') }}">
+<style>
+th{
+	width: 30%;
+}
+</style>
 {% extends "base.html" %}
 {% block content %}
 
-<div id="verdict">testing</div>
-
-{% endblock %}
+<div class="two_col_70">
+	<div class="codeblock language-cpp" style="border-radius: 7px;">
+<pre>
+<code>#include iwuehf</code>
+<code></code>
+<code>using namespace std</code>
+<code></code>
+<code>int main()</code>
+</pre>
+	</div>
+</div>
+<div class="two_col_30">
+	<div class="box" style="width: 100%;">
+		<div class="caption">Details</div>
+		<table class="table table-hover table-bordered">
+			<tbody>
+				<tr>
+					<th scope="row">Final Verdict</th>
+					<td><span id="verdict">loading..</span></td>
+				</tr>
+				<tr>
+					<th>Time</th>
+					<td>woiejf</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <script type="text/javascript">
 
 const doneupd = document.getElementById('verdict')
-
 var upd = setInterval(function(){
 	var req = new XMLHttpRequest()
 	req.open('GET', window.location.href+'/get_data')
@@ -18,7 +52,6 @@ var upd = setInterval(function(){
 			if(ret.done == 1){
 				doneupd.innerText = ret.finalverdict
 				clearInterval(upd)
-				alert('done')
 			}
 		}
 	}
@@ -26,3 +59,5 @@ var upd = setInterval(function(){
 }, 100)
 
 </script>
+
+{% endblock %}
