@@ -5,74 +5,56 @@
 
 {% block content %}
 
-<section>
-	<div class="box" style="width: 98%;">
-		<div class="caption">Announcement</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col" style="width: 15%">Author</th>
-					<th scope="col" style="width: 75%">Title</th>
-					<th scope="col" style="width: 10%">Time</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for data in announce %}
-				<tr>
-					<td>{{ data['author'] }}</td>
-					<td><a href='/announce/{{data["_id"]}}'>{{ data['title'] }}</a></td>
-					<td>{{ data['time'] }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-</section>
+<div class="box" style="width: 98%;">
+	<div class="caption">Announcement</div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th scope="col" style="width: 15%">Author</th>
+				<th scope="col" style="width: 75%">Title</th>
+				<th scope="col" style="width: 10%">Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for data in announce %}
+			<tr>
+				<td>{{ data['author'] }}</td>
+				<td><a href='/announce/{{data["_id"]}}'>{{ data['title'] }}</a></td>
+				<td>{{ data['time'] }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 
-<section>
-	<div class="box two_col_half">
-		<div class="caption">LeaderBoard</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-	<div class="box two_col_half">
-		<div class="caption">New Problems</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-</section>
+<div class="box two_col_half">
+	<div class="caption">LeaderBoard</div>
+	<div>123<br>iuehrg</div>
+</div>
+<div class="box two_col_half">
+	<div class="caption">New Problems</div>
+	<div>12</div>
+</div>
 
-<section>
-	<div class="box two_col_half">
-		<div class="caption">Upcoming Contest</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-	<div class="box two_col_half">
-		<div class="caption">Previous & Current Contest</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-</section>
+<div class="box two_col_half">
+	<div class="caption">Upcoming Contest</div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+	</table>
+</div>
+<div class="box two_col_half">
+	<div class="caption">Previous & Current Contest</div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+	</table>
+</div>
 
 {% endblock %}
