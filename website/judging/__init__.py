@@ -1,7 +1,7 @@
 from ..db import db
 import subprocess, os, time
 
-def default_validator(exe, test, ans, lang, time, file, memory):
+def default_validator(test, ans, lang, time, file, memory):
     execute = object()
     cmd = list()
     # assign run command for specific language
@@ -40,10 +40,10 @@ def judgement(pid, code, lang, subid):
     #start testing
     for tasks in data['subtasks']:
         for i in range(tasks['total']):
-            save[default_validator(subid, tasks['test'][i], tasks['ans'][i], lang, data['timelimit'], file, data['memlimit'])] = 1
+            save[default_validator(tasks['test'][i], tasks['ans'][i], lang, data['timelimit'], file, data['memlimit'])] = 1
 
     # verdict
-    verdict = str()
+    verdict = "validation error" # show this if no verdict found
     for a in range(4):
         if(save[a] == 1):
             verdict = name[a]
