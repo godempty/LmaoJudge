@@ -1,4 +1,5 @@
 from bson.objectid import ObjectId
+from datetime import datetime
 from flask import session
 from .db import db
 def new_problem(request):
@@ -23,3 +24,20 @@ def new_problem(request):
         "Author": session['user']['name']
     }
     return problem
+
+def new_submission(code, lang, pid): 
+    subid = db['count'].find_one({"name": 'submission'})['count']+1
+    db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
+
+    data = db['problem_test_data'].find_one({'_id': int(pid)})
+    today = datetime.now()
+    ret = {'_id': subid, 'done': 0, 'code': code, 'lang': lang, 'prob': pid, 'subtask': list(),
+            'verdict': '', 'subtime': f"{today.year}/{today.month}/{today.day}", 'userid': 0}
+    for i in data['subtasks']:
+        ret['subtask'].append(list())
+        for j in range(i['total']):
+            ret['subtask'][-1].append(['', 0, 0]) #verdict time memory
+
+    db['submission_data'].insert_one(ret)
+
+    return subid

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from .db import db
+from .model import new_submission
 from .judging import judgement
 from bson.objectid import ObjectId
 from bson import json_util
@@ -35,9 +36,10 @@ def submit(id):
         lang = request.form['lang']
 
         # create submission
-        subid = db['count'].find_one({"name": 'submission'})['count']+1
-        db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
-        db['submission_tmp'].insert_one({'_id': subid, 'done': 0, 'finalverdict': ''})
+        subid = new_submission(code, lang, id)
+        # subid = db['count'].find_one({"name": 'submission'})['count']+1
+        # db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
+        # db['submission_tmp'].insert_one({'_id': subid, 'done': 0, 'finalverdict': ''})
 
         #judge in another thread
         td = threading.Thread(target = judgement, args = [id, code, lang, subid])
@@ -58,10 +60,13 @@ def showannounce():
 
 @views.route('/submissions/<id>')
 def single_submission(id):
-    return render_template("single_submission.html", id=id)
+    get = db['submission_data'].find_one({'_id': int(id)})
+    # print(get['code'])
+    return render_template("single_submission.html", id=id, user=get['userid'], subtime=get['subtime'],
+            lang=get['lang'], pid=get['prob'], code=get['code'], task=get['subtask'])
 
 # to respond to frontend ajax
 @views.route('/submissions/<id>/get_data')
 def get_submission_data(id):
-    get = db['submission_tmp'].find_one({'_id': int(id)})
-    return jsonify(get)
+    get = db['submission_data'].find_one({'_id': int(id)})
+    return jsonify({'done': get['done'], 'subtask': get['subtask'], 'verdict': get['verdict']})

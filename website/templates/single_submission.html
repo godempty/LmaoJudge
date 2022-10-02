@@ -5,35 +5,72 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prism.css') }}">
 <style>
 th{
-	width: 30%;
+	width: 35%;
 }
 </style>
 {% extends "base.html" %}
 {% block content %}
 
 <div class="two_col_70">
-	<div class="codeblock language-cpp" style="border-radius: 7px;">
-<pre>
-<code>#include iwuehf</code>
-<code></code>
-<code>using namespace std</code>
-<code></code>
-<code>int main()</code>
-</pre>
+	<div class="codeblock">
+{% for text in code.splitlines() %}
+<code>{{ text }}</code>
+{% endfor %}
+	</div>
+	<div class="table-responsive" style="width: 99%; margin-top: 25px">
+		<table class="table">
+			<thead>
+				<tr class="table-success">
+					<th scope="col">Subtask No.</th>
+					<th scope="col">Result</th>
+					<th scope="col">Time</th>
+					<th scope="col">Memory</th>
+				</tr>
+			</thead>
+			{% for i in range(task|length) %}
+				{% for j in range(task[i]|length)%}
+				<tbody>
+					<tr id="tk{{ i+j }}">
+						<td>{{ i+1 }}</td>
+						<td>running..</td>
+						<td>- ms</td>
+						<td>- kb</td>
+					</tr>
+				</tbody>
+				{% endfor %}
+			{% endfor %}
+		</table>
 	</div>
 </div>
+
 <div class="two_col_30">
 	<div class="box" style="width: 100%;">
 		<div class="caption">Details</div>
 		<table class="table table-hover table-bordered">
 			<tbody>
 				<tr>
-					<th scope="row">Final Verdict</th>
+					<th>Submission ID</th>
+					<td>{{ id }}</td>
+				</tr>
+				<tr>
+					<th>Problem ID</th>
+					<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
+				</tr>
+				<tr>
+					<th>Submit Time</th>
+					<td>{{ subtime }}</td>
+				</tr>
+				<tr>
+					<th>User</th>
+					<td>{{ user }}</td>
+				</tr>
+				<tr>
+					<th>Final Verdict</th>
 					<td><span id="verdict">loading..</span></td>
 				</tr>
 				<tr>
-					<th>Time</th>
-					<td>woiejf</td>
+					<th>Language</th>
+					<td>{{ lang }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -42,15 +79,32 @@ th{
 
 <script type="text/javascript">
 
-const doneupd = document.getElementById('verdict')
+const verd = document.getElementById('verdict')
+var curi = 0
+var curj = 0
 var upd = setInterval(function(){
 	var req = new XMLHttpRequest()
 	req.open('GET', window.location.href+'/get_data')
 	req.onreadystatechange = function(){
 		if(req.readyState == 4){
 			ret = JSON.parse(req.responseText)
+			while(curi < ret.subtask.length){
+				curj = 0
+				while(curj < ret.subtask[curi].length){
+					if(ret.subtask[curi][curj][0] != ""){
+						const info = document.getElementById('tk' + String(curi+curj))
+						info.childNodes[3].innerText = ret.subtask[curi][curj][0]
+						info.childNodes[5].innerText = ret.subtask[curi][curj][1] + " ms"
+						info.childNodes[7].innerText = ret.subtask[curi][curj][2] + " kb"
+						curj += 1
+					}
+					else break
+				}
+				if(curj >= ret.subtask[curi].length) curi += 1
+				else break
+			}
 			if(ret.done == 1){
-				doneupd.innerText = ret.finalverdict
+				verd.innerText = ret.verdict
 				clearInterval(upd)
 			}
 		}

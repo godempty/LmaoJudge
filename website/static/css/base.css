@@ -222,17 +222,19 @@ textarea{
 	width: 99%;
 	margin-top: 25px;
 }
-.codeblock pre{
-	counter-reset: line;
-	padding-left: 7px;
-	border-radius: 7px;
-}
-.codeblock code:before{
-	counter-increment: line;
-	content: counter(line);
-	display: inline-block;
-	border-right: 2px solid var(--linkcolor);
-	padding-right: 3px;
-	margin-right: 7px;
-}
+/*line number(currently doesn't work with jinja)*/
+/*.codeblock div{*/
+	/*counter-reset: line;*/
+	/*padding-left: 7px;*/
+	/*border-radius: 7px;*/
+/*}*/
+/*.codeblock code:before{*/
+	/*counter-increment: line;*/
+	/*content: counter(line);*/
+	/*display: inline-block;*/
+	/*border-right: 2px solid var(--linkcolor);*/
+	/*padding-right: 3px;*/
+	/*margin-right: 7px;*/
+/*}*/
+
 /* codeblock from single submission page end*/
