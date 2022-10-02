@@ -63,7 +63,7 @@ def single_submission(id):
     get = db['submission_data'].find_one({'_id': int(id)})
     # print(get['code'])
     return render_template("single_submission.html", id=id, user=get['userid'], subtime=get['subtime'],
-            lang=get['lang'], pid=get['prob'], code=get['code'], task=get['subtask'])
+            lang=get['lang'], pid=get['prob'], code=get['code'].splitlines(), task=get['subtask'])
 
 # to respond to frontend ajax
 @views.route('/submissions/<id>/get_data')
