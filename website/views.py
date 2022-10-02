@@ -35,8 +35,8 @@ def submit(id):
         lang = request.form['lang']
 
         # create submission
-        subid = db['submission_count'].find_one()['num']+1
-        db['submission_count'].update_one({}, {'$set': {'num': subid}})
+        subid = db['count'].find_one({"name": 'submission'})['count']+1
+        db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
         db['submission_tmp'].insert_one({'_id': subid, 'done': 0, 'finalverdict': ''})
 
         #judge in another thread
