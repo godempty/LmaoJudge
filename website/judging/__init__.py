@@ -26,6 +26,7 @@ def default_validator(test, ans, lang, time, file, memory):
 
 def judgement(pid, code, lang, subid):
     data = db['problem_test_data'].find_one({'_id': int(pid)})
+    subdata = db['submission_data']
     
     file = os.path.abspath(os.path.dirname(__file__) + '/exes/'+str(subid))
     #compile
@@ -35,17 +36,15 @@ def judgement(pid, code, lang, subid):
             db['submission_data'].update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'compile error'}})
             return
 
-    update = {'done': 1, 'subtask': list()}
-
     save = [0, 0, 0, 0] #re tle wa ac
     name = ['RE', 'TLE', 'WA', 'AC']
     #start testing
-    for tasks in data['subtasks']:
-        update['subtask'].append(list())
+    for k in range(data['total_subtasks']):
+        tasks = data['subtasks'][k]
         for i in range(tasks['total']):
             get = default_validator(tasks['test'][i], tasks['ans'][i], lang, data['timelimit'], file, data['memlimit'])
             save[get] = 1
-            update['subtask'][-1].append([name[get], 0, 0])
+            subdata.update_one({'_id': subid}, {'$set': {'subtask.'+str(k)+'.'+str(i): [name[get], 0, 0]}})
 
     verdict = "validation error" # show this if no verdict found
     # verdict that is at the front has higher priority for final verdict
@@ -53,8 +52,7 @@ def judgement(pid, code, lang, subid):
         if(save[a] == 1):
             verdict = name[a]
             break
-    update['verdict'] = verdict
-    db['submission_data'].update_one({'_id': subid}, {'$set': update})
+    subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': verdict}})
 
     #delete executable
     if(lang == 'c++'):

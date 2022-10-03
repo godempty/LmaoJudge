@@ -3,17 +3,20 @@
 {% block title %} Submit {% endblock %}
 {% block content %}
 <div class="submit-box">
-	<h3>Problem id. {{ id }}</h3>
+	<h2>name_of_the_problem</h2>
+	<div id="id_box">{{ id }}</div>
 	<form class="form-group" action="/submit/{{ id }}" method="post">
-		<textarea class="form-control" id="code-area" type="text" name="code"></textarea>
+		<div id="description">Choose Language(Compiler)</div>
 		<div id="choose">
 			<select class="form-select" style="margin-right: 10px" name="lang">
 				<option value="c++">c++</option>
 				<option value="c">c(not done)</option>
 				<option value="python">python(not done)</option>
 			</select>
-			<input class="btn btn-primary" type="submit" value="submit code">
 		</div>
+		<div id="description">Source Code</div>
+		<textarea class="form-control" id="code-area" type="text" name="code"></textarea>
+		<input class="btn btn-primary" type="submit" value="submit code">
 	</form>
 </div>
 {% endblock %}

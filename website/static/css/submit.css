@@ -11,3 +11,18 @@
 	display: inline-flex;
 	align-items: stretch;
 }
+h2{
+	padding-top: 10px;
+	display: inline-block;
+}
+#id_box{
+	display: inline-block;
+	background-color: green;
+	padding: 0 10 0 10;
+	border-radius: 5px;
+	color: white;
+}
+#description{
+	margin-top: 15px;
+	margin-bottom: 9px;
+}

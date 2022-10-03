@@ -1,0 +1,13 @@
+#details th{
+	width: 35%;
+}
+
+#runtask{
+	width: 99%;
+	margin-top: 25px;
+	border-radius: 7px;
+}
+
+#colorhead{
+	background-color: gainsboro;
+}

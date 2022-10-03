@@ -1,11 +1,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/github-gist.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<style>
-th{
-	width: 35%;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/single_submission.css') }}">
 {% extends "base.html" %}
 {% block content %}
 
@@ -14,17 +10,17 @@ th{
 		<table>
 			{% for i in range(code|length) %}
 			<tr>
-				<th style="border-right: 2px solid var(--linkcolor); padding-right: 4px;">{{ i+1 }}</th>
-				<td><div class="cpp" style="white-space: pre; margin-left: 7px;">{{ code[i] }}</div></td>
+				<th>{{ i+1 }}</th>
+				<td><div class="code_content cpp">{{ code[i] }}</div></td>
 			</tr>
 			{% endfor %}
 		</table>
 	</div>
-	<div class="table-responsive" style="width: 99%; margin-top: 25px">
+	<div class="table-responsive" id="runtask">
 		<table class="table">
 			<thead>
-				<tr class="table-success">
-					<th scope="col">Subtask No.</th>
+				<tr id="colorhead">
+					<th scope="col" style="width: 20%">Subtask No.</th>
 					<th scope="col">Result</th>
 					<th scope="col">Time</th>
 					<th scope="col">Memory</th>
@@ -49,7 +45,7 @@ th{
 <div class="two_col_30">
 	<div class="box" style="width: 100%;">
 		<div class="caption">Details</div>
-		<table class="table table-hover table-bordered">
+		<table class="table table-hover table-bordered" id="details">
 			<tbody>
 				<tr>
 					<th>Submission ID</th>
@@ -109,12 +105,18 @@ var upd = setInterval(function(){
 			if(ret.done == 1){
 				verd.innerText = ret.verdict
 				clearInterval(upd)
-				//compiler error
-				if(ret.verdict == 'compiler error')
+				// colors for different results
+				const color = document.getElementById('colorhead')
+				if(ret.verdict == 'compile error'){
 					for(let i=0;i<ret.subtask.length;++i) for(let j=0;j<ret.subtask[i].length;++j){
 						const info = document.getElementById('tk' + String(i + j))
 						info.childNodes[3].innerText = 'CE'
 					}
+					color.style = 'background-color: lightgoldenrodyellow'
+				}
+				else if(ret.verdict == 'AC') color.style = 'background-color: palegreen'
+				else if(ret.verdict == 'WA') color.style = 'background-color: salmon'
+				else if(ret.verdict == 'TLE') color.style = 'background-color: lightsteelblue'
 			}
 		}
 	}
