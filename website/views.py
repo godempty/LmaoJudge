@@ -25,9 +25,12 @@ def problem_page(id):
 def contests():
     return render_template("contests.html")
 
-@views.route('/submissions')
-def submissions():
-    return render_template("submissions.html")
+@views.route('/submissions_list/<page>')
+def submissions_list(page = 0):
+    num_per_page = 20
+    page = int(page)
+    data = db['submission_data'].find({'_id': {'$gte': num_per_page*page, '$lt': num_per_page*(page+1)}}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1})
+    return render_template("submissions.html", data = data)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):
@@ -37,11 +40,8 @@ def submit(id):
 
         # create submission
         subid = new_submission(code, lang, id)
-        # subid = db['count'].find_one({"name": 'submission'})['count']+1
-        # db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
-        # db['submission_tmp'].insert_one({'_id': subid, 'done': 0, 'finalverdict': ''})
 
-        #judge in another thread
+        # #judge in another thread
         td = threading.Thread(target = judgement, args = [id, code, lang, subid])
         td.start()
         return redirect(url_for('views.single_submission', id=subid))
