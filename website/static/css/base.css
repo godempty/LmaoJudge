@@ -139,34 +139,13 @@ nav{
 	width: 19%;
 }
 .two_col_20 > div{
-	width: 99%;
+	width: 98%;
 }
 @media (max-width: 1000px){
 	.two_col_80{
 		width: 98%;
 	}
 	.two_col_20{
-		width: 98%;
-	}
-}
-.two_col_70{
-	display: inline-block;
-	vertical-align: top;
-	width: 75%;
-}
-.two_col_30{
-	display: inline-block;
-	vertical-align: top;
-	width: 24%;
-}
-.two_col_30 > div{
-	width: 99%;
-}
-@media (max-width: 1000px){
-	.two_col_70{
-		width: 98%;
-	}
-	.two_col_30{
 		width: 98%;
 	}
 }
@@ -219,8 +198,6 @@ textarea{
 
 /* codeblock from single submission page*/
 #codeblock{
-	width: 99%;
-	margin-top: 25px;
 	background-color: black;
 	overflow: auto;
 	padding: 10 10 10 10;

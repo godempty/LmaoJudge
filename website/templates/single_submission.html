@@ -5,75 +5,93 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="two_col_70">
-	<div id="codeblock">
-		<table>
-			{% for i in range(code|length) %}
-			<tr>
-				<th>{{ i+1 }}</th>
-				<td><div class="code_content cpp">{{ code[i] }}</div></td>
+<div class="box table-responsive" style="width: 100%;">
+	<div class="caption">Details</div>
+	<table class="table" id="large">
+		<thead>
+			<tr id="colorhead">
+				<th>Submission ID</th>
+				<th>Problem ID</th>
+				<th>User</th>
+				<th>Final Verdict</th>
+				<th>Submit Time</th>
+				<th>Language</th>
 			</tr>
-			{% endfor %}
-		</table>
-	</div>
-	<div class="table-responsive" id="runtask">
-		<table class="table">
-			<thead>
-				<tr id="colorhead">
-					<th scope="col" style="width: 20%">Subtask No.</th>
-					<th scope="col">Result</th>
-					<th scope="col">Time</th>
-					<th scope="col">Memory</th>
-				</tr>
-			</thead>
-			{% for i in range(task|length) %}
-				{% for j in range(task[i]|length)%}
-				<tbody>
-					<tr id="tk{{ i+j }}">
-						<td>{{ i+1 }}</td>
-						<td>running..</td>
-						<td>- ms</td>
-						<td>- kb</td>
-					</tr>
-				</tbody>
-				{% endfor %}
-			{% endfor %}
-		</table>
-	</div>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{ id }}</td>
+				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
+				<td>{{ user }}</td>
+				<td><span id="verdict">loading..</span></td>
+				<td>{{ subtime }}</td>
+				<td>{{ lang }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="table" id="small">
+		<tbody>
+			<tr>
+				<th>Submission ID</th>
+				<td>{{ id }}</td>
+			</tr>
+			<tr>
+				<th>Problem ID</th>
+				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
+			</tr>
+			<tr>
+				<th>Submit Time</th>
+				<td>{{ subtime }}</td>
+			</tr>
+			<tr>
+				<th>User</th>
+				<td>{{ user }}</td>
+			</tr>
+			<tr>
+				<th>Final Verdict</th>
+				<td><span id="verdict">loading..</span></td>
+			</tr>
+			<tr>
+				<th>Language</th>
+				<td>{{ lang }}</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-
-<div class="two_col_30">
-	<div class="box" style="width: 100%;">
-		<div class="caption">Details</div>
-		<table class="table table-hover table-bordered" id="details">
+<div id="codeblock">
+	<table>
+		{% for i in range(code|length) %}
+		<tr>
+			<th>{{ i+1 }}</th>
+			<td><div class="code_content cpp">{{ code[i] }}</div></td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+<div class="box table-responsive" id="runtask">
+	<div class="caption">Results</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Subtask</th>
+				<th scope="col">Verdict</th>
+				<th scope="col">Time</th>
+				<th scope="col">Memory</th>
+			</tr>
+		</thead>
+		{% for i in range(task|length) %}
+			{% for j in range(task[i]|length)%}
 			<tbody>
-				<tr>
-					<th>Submission ID</th>
-					<td>{{ id }}</td>
-				</tr>
-				<tr>
-					<th>Problem ID</th>
-					<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
-				</tr>
-				<tr>
-					<th>Submit Time</th>
-					<td>{{ subtime }}</td>
-				</tr>
-				<tr>
-					<th>User</th>
-					<td>{{ user }}</td>
-				</tr>
-				<tr>
-					<th>Final Verdict</th>
-					<td><span id="verdict">loading..</span></td>
-				</tr>
-				<tr>
-					<th>Language</th>
-					<td>{{ lang }}</td>
+				<tr id="tk{{ i+j }}">
+					<td>{{ i+1 }}</td>
+					<td>running..</td>
+					<td>- ms</td>
+					<td>- kb</td>
 				</tr>
 			</tbody>
-		</table>
-	</div>
+			{% endfor %}
+		{% endfor %}
+	</table>
 </div>
 
 <script type="text/javascript">
@@ -115,7 +133,7 @@ var upd = setInterval(function(){
 					color.style = 'background-color: lightgoldenrodyellow'
 				}
 				else if(ret.verdict == 'AC') color.style = 'background-color: palegreen'
-				else if(ret.verdict == 'WA') color.style = 'background-color: salmon'
+				else if(ret.verdict == 'WA') color.style = 'background-color: #ebccd1'
 				else if(ret.verdict == 'TLE') color.style = 'background-color: lightsteelblue'
 			}
 		}

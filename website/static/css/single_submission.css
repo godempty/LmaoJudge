@@ -1,13 +1,22 @@
-#details th{
-	width: 35%;
-}
-
 #runtask{
-	width: 99%;
+	width: 100%;
 	margin-top: 25px;
 	border-radius: 7px;
 }
 
 #colorhead{
 	background-color: gainsboro;
+}
+
+#small{
+	display: none;
+}
+
+@media (max-width: 800px){
+	#small{
+		display: table;
+	}
+	#large{
+		display: none;
+	}
 }
