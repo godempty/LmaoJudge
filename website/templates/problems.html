@@ -32,6 +32,15 @@
 
         </tbody>
     </table>
+	<div>
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="/">&lt;</a></li>
+			{% for i in range(4) %}
+				<li class="page-item"><a class="page-link" href="/submissions_list/?page={{ i }}">{{ i }}</a></li>
+			{% endfor %}
+			<li class="page-item"><a class="page-link" href="/">&gt;</a></li>
+		</ul>
+	</div>
 </div>
 
 {% endblock %}
