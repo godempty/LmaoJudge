@@ -28,7 +28,7 @@ def login():
 
 @auth.route('/log-out')
 def logout():
-    session['user'] = False
+    session['user'] = None
     session['ann'] = False
     session['logged'] = False
     return redirect('/')
@@ -36,7 +36,8 @@ def logout():
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def signup():
     allaccount = db['account']
-    
+    if not session.get('logged'):
+        session['logged'] = None
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
