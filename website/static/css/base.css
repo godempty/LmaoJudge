@@ -8,7 +8,7 @@ body{
 	background-color: rgba(255, 255, 224, 0.562);
 }
 
-.container a:link, .container a:visited{
+.container a:link:not(.page-link), .container a:visited:not(.page-link){
 	color: var(--linkcolor);
 	text-decoration: none;
 	font-weight:bold;
@@ -16,7 +16,7 @@ body{
 	text-align: left;
 }
 
-.container a:hover{
+.container a:hover:not(.page-link){
 	color: var(--linkhover);
 }
 
@@ -216,3 +216,17 @@ textarea{
 	color: white;
 }
 /* codeblock from single submission page end*/
+
+/* page chooser*/
+.page-link{
+	background-color: rgba(255, 255, 224, 0.8);
+	color: var(--linkcolor);
+}
+.page-link:hover{
+	background-color: var(--linkhover);
+	color: white;
+}
+.page-link:focus{
+	outline: none;
+}
+/* page chooser end*/

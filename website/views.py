@@ -26,11 +26,12 @@ def problem_page(id):
 def contests():
     return render_template("contests.html")
 
-@views.route('/submissions_list/<page>')
-def submissions_list(page = 0):
+@views.route('/submissions_list/')
+def submissions_list():
     num_per_page = 20
-    page = int(page)
-    data = db['submission_data'].find({'_id': {'$gte': num_per_page*page, '$lt': num_per_page*(page+1)}}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1})
+    page = int(request.args.get("page", 0))
+    # data = db['submission_data'].find({'_id': {'$gte': cur_num - num_per_page*(page+1), '$lt': cur_num+1 - num_per_page*page}}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1})
+    data = db['submission_data'].find({}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1}).sort('$natural', -1).limit(num_per_page)
     return render_template("submissions.html", data = data)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
@@ -62,7 +63,6 @@ def showannounce():
 @views.route('/submissions/<id>')
 def single_submission(id):
     get = db['submission_data'].find_one({'_id': int(id)})
-    # print(get['code'])
     return render_template("single_submission.html", id=id, user=get['userid'], subtime=get['subtime'],
             lang=get['lang'], pid=get['prob'], code=get['code'].splitlines(), task=get['subtask'])
 

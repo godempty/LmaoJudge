@@ -32,7 +32,8 @@ def new_submission(code, lang, pid):
     data = db['problem_test_data'].find_one({'_id': int(pid)})
     today = datetime.now()
     ret = {'_id': subid, 'done': 0, 'code': code, 'lang': lang, 'prob': pid, 'subtask': list(),
-            'verdict': '', 'subtime': f"{today.year}/{today.month}/{today.day}", 'userid': 0}
+            'verdict': '', 'exetime': 0, 'exemem': 0,
+            'subtime': f"{today.year}/{today.month}/{today.day}", 'userid': 0}
     for i in data['subtasks']:
         ret['subtask'].append(list())
         for j in range(i['total']):
