@@ -21,7 +21,10 @@ def login():
                 flash('密碼錯誤!', category='error')
             else:
                 session['logged']=True
-                session['user'] = json.loads(json_util.dumps(account))
+                acc = account
+                acc['email'] = None
+                acc['password'] = None
+                session['user'] = json.loads(json_util.dumps(acc))
                 flash('登入成功!',category='success')
                 return redirect('/')
     return render_template("auth/login.html")

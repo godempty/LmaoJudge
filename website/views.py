@@ -71,3 +71,11 @@ def single_submission(id):
 def get_submission_data(id):
     get = db['submission_data'].find_one({'_id': int(id)})
     return jsonify({'done': get['done'], 'subtask': get['subtask'], 'verdict': get['verdict']})
+
+@views.route('/user/<id>')
+def show_user(id):
+    
+    if not session['user']:
+        return "Not logged in"
+    else:
+        return render_template("user_page.html")
