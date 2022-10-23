@@ -10,6 +10,7 @@
             crossorigin="anonymous"
         />
 		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/base.css') }}">
+        <script src="../static/js/admin.js"></script>
         <title>{% block title %}Home{% endblock %}</title>
     </head>
     <body>
@@ -34,13 +35,14 @@
 					<a class="nav-item nav-link" id="contests" href="/contests">Contests</a>
                     {% if session['user'] %}
                         {% if session['user']['admin'] == true %}
-                            <a class="nav-item nav-link" id="Admin" href="/admin">Admin</a>
+                            <a class="nav-item nav-link" class="Admin" href="/admin">Admin</a>
                         {% endif %}
                     {% endif %}
 				</div>
                 {% if session['logged'] == True %}
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link" id="signOut" href="/log-out">Log Out</a>
+                    <a class="nav-item nav-link" id="seeuser" href="/user/{{session['user']['name']}}">User Info</a>
+                    <a class="nav-item nav-link" id="signOut" href="/log-out">Log Out</a>  
                 </div>
                 {% else %}
                     <div class="navbar-nav ms-auto">

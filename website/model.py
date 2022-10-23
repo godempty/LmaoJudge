@@ -25,7 +25,7 @@ def new_problem(request):
     }
     return problem
 
-def new_submission(code, lang, pid): 
+def new_submission(code, lang, pid, user): 
     subid = db['count'].find_one({"name": 'submission'})['count']+1
     db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
 

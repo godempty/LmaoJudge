@@ -1,4 +1,4 @@
-import re
+from datetime import datetime
 from flask import Blueprint, render_template, request, flash, session, redirect
 from .db import db 
 from bson import json_util
@@ -58,11 +58,17 @@ def signup():
         elif exist:
             flash('此email已被註冊過', category='error')
         else:
+            today = datetime.now()
+            today = today.strftime("%Y/%m/%d %H:%M:%S")
             newaccount = {
                 'name': name,
                 'email': email,
                 'password': password1,
                 'admin': False,
+                'AC': 0,
+                'WA': 0,
+                'AC rate': 0,
+                'signed up': f"{today}",
             }
             allaccount.insert_one(newaccount)
             flash('註冊成功!',category='success')

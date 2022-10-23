@@ -20,41 +20,55 @@
             placeholder="description"
             required
         ></textarea>
-        <div class="io-f">
-            <textarea 
+
+        <div class="width-100p box box-io">
+            <div class="caption"> In/Out Format </div>
+            <div class="io-f">
+                <textarea 
                 type="text"
                 class="form-control io-format"
                 name="i_format"
                 placeholder="input format"
                 required
-            ></textarea>
-            <div class="io-f-space"></div>
-            <textarea 
+                ></textarea>
+                <div class="io-f-space"></div>
+                <textarea 
                 type="text"
                 class="form-control io-format"
                 name="o_format"
                 placeholder="output format"
                 required
-            ></textarea>
+                ></textarea>
+            </div>
         </div>
-        <div class="io-f">
-            <textarea 
-                type="text"
-                class="form-control io-format samples"
-                name="sample[]"
-                placeholder="input sample "
-                required
-            ></textarea>
-            <div class="io-f-space"></div>
-            <textarea 
-                type="text"
-                class="form-control io-format samples"
-                name="sample[]"
-                placeholder="output sample"
-                required
-            ></textarea>
+        <div class="width-100p box box-io">
+            <div class="caption"> In/Out Sample 
+                <div>
+                    <button style="color: white;" class="btn btn-primary btn-sm" type="button" onclick="add_sample()">add sample</button> 
+                    <button style="color: white;" class="btn btn-danger btn-sm" type="button" onclick="del_sample()">delete sample</button> 
+                </div>      
+            </div>
+            <div id="io-sample">
+                <div class="io-f">
+                    <textarea 
+                        type="text"
+                        class="form-control io-format samples"
+                        name="sample[]"
+                        placeholder="input sample 1"
+                        required
+                    ></textarea>
+                    <div class="io-f-space"></div>
+                    <textarea 
+                        type="text"
+                        class="form-control io-format samples"
+                        name="sample[]"
+                        placeholder="output sample 1"
+                        required
+                    ></textarea>
+                </div>
+            </div>
         </div>
-        <button style="margin-top: 0.7%;" type="submit" class="btn btn-dark">ADD</button>
+        <button style="margin-top: 0.7%;" type="submit" class="btn btn-dark">Add Problem</button>
     </form>
     <script>
     </script>

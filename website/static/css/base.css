@@ -27,7 +27,7 @@ div.navbar-nav a{
 	margin-right: 10px;
 	margin-left: 5px;
 }
-#admin {
+.admin {
 	color: red;
 }
 div.navbar-nav a:hover{
@@ -185,9 +185,16 @@ nav{
 }
 .io-f{
 	display: flex;
+
 }
 .io-f-space{
-	width: 2.5%;
+	width: 1%;
+}
+.width-100p{
+	width: 100%;
+}
+.box-io{
+	padding-bottom: 0.75%;
 }
 /* admin page end*/
 

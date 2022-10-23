@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from .db import db
 from .model import new_submission
@@ -41,8 +40,10 @@ def submit(id):
         lang = request.form['lang']
 
         # create submission
-        subid = new_submission(code, lang, id)
-
+        if session.get('user'):
+            subid = new_submission(code, lang, id, session['user'].name)
+        else:
+            return "<p> please logged in !</p>"
         # #judge in another thread
         td = threading.Thread(target = judgement, args = [id, code, lang, subid])
         td.start()
@@ -72,10 +73,9 @@ def get_submission_data(id):
     get = db['submission_data'].find_one({'_id': int(id)})
     return jsonify({'done': get['done'], 'subtask': get['subtask'], 'verdict': get['verdict']})
 
-@views.route('/user/<id>')
-def show_user(id):
-    
-    if not session['user']:
-        return "Not logged in"
-    else:
-        return render_template("user_page.html")
+@views.route('/user/<username>')
+def show_user(username):
+    userTOshow = db['account'].find_one({'name': username}, {'password': 0, '_id': 0})
+    if not userTOshow:
+        return render_template("error/user_not_found.html")
+    return render_template("user_page.html", show = userTOshow)
