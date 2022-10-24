@@ -4,7 +4,7 @@
 
 <div class="box add-box">
     <div class="caption">New Problem</div>
-    <form class="form-group add-form problem-form" id="add-problem" name="addannounce" method="POST">
+    <form class="form-group add-form problem-form" id="add-problem" name="addproblem" method="POST">
         <input 
             type="text"
             class="form-control" 
@@ -16,8 +16,8 @@
         <textarea
             type="text"
             class="form-control problem-text"
-            name="description" 
-            placeholder="description"
+            name="statement" 
+            placeholder="statement"
             required
         ></textarea>
 
@@ -43,9 +43,9 @@
         </div>
         <div class="width-100p box box-io">
             <div class="caption"> In/Out Sample 
-                <div>
-                    <button style="color: white;" class="btn btn-primary btn-sm" type="button" onclick="add_sample()">add sample</button> 
-                    <button style="color: white;" class="btn btn-danger btn-sm" type="button" onclick="del_sample()">delete sample</button> 
+                <div style="padding: 0% 0% 0% 0%">
+                    <button style="color: white;" class="btn btn-outline btn-sm" type="button" onclick="add_sample()">add sample</button> 
+                    <button style="color: white;" class="btn btn-outline btn-sm" type="button" onclick="del_sample()">delete sample</button> 
                 </div>      
             </div>
             <div id="io-sample">
@@ -64,6 +64,45 @@
                         name="sample[]"
                         placeholder="output sample 1"
                         required
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex">
+            <div class="width-100p box box-io">
+                <div class="caption">
+                    Limits
+                </div>
+                <div class="io-f">          
+                    <textarea 
+                    type="text"
+                    class="form-control io-format samples"
+                    name="time-limit"
+                    placeholder="time limit"
+                    required
+                    ></textarea>
+                    <div class="io-f-space"></div>
+                    <textarea 
+                    type="text"
+                    class="form-control io-format samples"
+                    name="memory-limit"
+                    placeholder="memory limit"
+                    required
+                    ></textarea>
+                </div>
+            </div>
+            <div class="io-f-space"></div>
+            <div class="width-100p box box-io">
+                <div class="caption">
+                    Notes
+                </div>
+                <div class="io-f">                 
+                    <textarea 
+                    type="text"
+                    class="form-control io-format samples"
+                    name="notes"
+                    placeholder="notes"
+                    required
                     ></textarea>
                 </div>
             </div>

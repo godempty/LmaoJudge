@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="box">
-        <p>name: {{ show['name'] }}</p>
-        <p>gmail: {{ show['gmail'] }} </p>
+    <div class="width-100p box">
+        <div class="width-100p caption">User Information</div>
+        <div style="padding: 0.8% 0% 0% 0.4%;">       
+            <p>Name : {{ show['name'] }}</p>
+            <p>Admin : 
+                {% if show['admin'] %}
+                yes
+                {% else %}
+                no
+                {% endif %}
+            </p>   
+            <p>Email : {{ show['email'] }}</p>
+            <p>AC : {{ show['AC'] }} </p>
+            <p>WA : {{ show['WA'] }} </p>
+        </div>
     </div>
 
 {% endblock %}

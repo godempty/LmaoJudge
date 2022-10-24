@@ -75,7 +75,7 @@ def get_submission_data(id):
 
 @views.route('/user/<username>')
 def show_user(username):
-    userTOshow = db['account'].find_one({'name': username}, {'password': 0, '_id': 0})
+    userTOshow = db['account'].find_one({'name': username}, {'password': 0})
     if not userTOshow:
         return render_template("error/user_not_found.html")
     return render_template("user_page.html", show = userTOshow)
