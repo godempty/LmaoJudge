@@ -69,6 +69,50 @@
             </div>
         </div>
         <div style="display: flex">
+            <div class="width-100p height-50p box box-io">
+                <div class="caption">
+                    Checker
+                </div>
+                <div class="io-f">          
+                    <textarea 
+                    type="text"
+                    class="form-control io-format samples"
+                    name="checker"
+                    placeholder="checker"
+                    required
+                    ></textarea>
+                </div>
+            </div>
+            <div class="io-f-space"></div>
+            <div class="width-100p box box-io">
+                <div class="caption">
+                    Solution
+                    <div class="dropdown">
+                        <button style="color: white;" class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Solution type
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <button class="dropdown-item" type="button" onclick="sol_code()">Code</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" onclick="sol_answer()">Answer</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="io-f" id="sol-block">                
+                    <textarea 
+                    type="text"
+                    class="form-control io-format samples"
+                    name="solution-code"
+                    placeholder="solution-code"
+                    required
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex">
             <div class="width-100p box box-io">
                 <div class="caption">
                     Limits

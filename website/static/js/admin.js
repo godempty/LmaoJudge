@@ -14,3 +14,23 @@ function del_sample(){
         alert(`you can't delete the last element of sample!`)
     }
 }
+
+function sol_answer(){
+    section = document.getElementById('sol-block');
+    section.innerHTML = "<textarea type='text'"+
+    "class='form-control io-format samples'"+
+    "name='solution-answer'"+
+    "placeholder='solution-answer'"+
+    "required"+
+    "></textarea>";
+}
+
+function sol_code(){
+    section = document.getElementById('sol-block');
+    section.innerHTML = "<textarea type='text'"+
+    "class='form-control io-format samples'"+
+    "name='solution-code'"+
+    "placeholder='solution-code'"+
+    "required"+
+    "></textarea>";
+}

@@ -194,10 +194,14 @@ nav{
 .width-100p{
 	width: 100%;
 }
+.height-50p{
+	height: 50%;
+}
 .box-io{
 	padding-bottom: 0.75%;
 	margin-bottom: 0%;
 }
+
 /* admin page end*/
 
 textarea{

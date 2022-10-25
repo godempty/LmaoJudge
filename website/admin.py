@@ -25,15 +25,17 @@ def addannounce():
         db['announcements'].insert_one(announcement)
     return render_template("admin/announcescontrol.html", announce = announce)
 
-@admin.route('/addproblems', methods=['POST','GET'])
+@admin.route('/addproblems/', methods=['POST','GET'])
 def addproblems():
+    type = str(request.args.get('sol'))
     if request.method == 'POST':
         problem = new_problem(request)
         print(request.form)
         print(request.form.getlist('sample[]'))
         print(problem)
         #db['problems'].insert_one(problem)
-    return render_template("admin/problemscontrol.html")
+
+    return render_template("admin/problemscontrol.html", type = type)
 
 @admin.route('/announcedelete/<id1>')
 def delete(id1):
