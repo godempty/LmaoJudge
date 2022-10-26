@@ -17,9 +17,12 @@ def home():
 def problems():
     return render_template("problems.html")
 
-@views.route('/problems/<id>')
-def problem_page(id):
-    return render_template("problem_page.html", pid=id)
+@views.route('/problems/<pid>')
+def problem_page(pid):
+    
+    problem = db['problems'].find_one({"pid": int(pid)})
+    lens = len(problem['i_sample'])
+    return render_template("problem_page.html", problem = problem, lens=lens)
 
 @views.route('/contests')
 def contests():

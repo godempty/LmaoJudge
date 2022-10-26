@@ -6,21 +6,29 @@ def new_problem(request):
     cnt = db['count'].find_one({"name": "problem"})
     count = cnt['count']+1
     db['count'].update_one({"name": "problem"}, {"$set":{"count": count}})
+    solution_answer = request.form.get('solution-answer')
+    if not solution_answer:
+        sol_code = request.form.get('solution-code')
+        #run solution code
+        # get_answer(sol_code)
     problem = {
-        "id": count,
-        "tag": request.form.get('tag'),
-        "topcoder": "none", #
+        "pid": count,
+        "tag": request.form.get('tags'),
+        "topcoder": "none", 
         "record": 0, #to check topcoder
-        "ac_user": 0, #acrate user
-        "ac_submission": 0, #acrate submission
+        "ac_user": 0.0, #acrate user
+        "ac_submission": 0.0, #acrate submission
         "name": request.form.get('name'),
-        "description": request.form.get('description'),
+        "statement": request.form.get('statement'),
         "i_format": request.form.get('i_format'), #input format
         "o_format": request.form.get('o_format'), #output format
-        "sample": request.form.getlist('sample[]'),
-        "hint": request.form.get('hint'),
-        "t_limit": request.form.get('t_limit'), #time limit
-        "m_limit": request.form.get('m_limit'), #memory limit
+        "i_sample": request.form.getlist('i_sample[]'),
+        "o_sample": request.form.getlist('o_sample[]'),
+        "checker": request.form.get('checker'),
+        "solution-answer": solution_answer,
+        "notes": request.form.get('notes'),
+        "time_limit": request.form.get('time-limit'), #time limit
+        "memory_limit": request.form.get('memory-limit'), #memory limit
         "Author": session['user']['name']
     }
     return problem

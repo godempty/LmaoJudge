@@ -29,7 +29,12 @@
                 <td>100%(1/1)</td>
                 <td class="hid-info">1%(1/100)</td>
             </tr>
-
+            {% for i in range(10) %}
+            <tr>
+                <th scope="row">{{ i }}</th>
+                <td><a href="/problems/{{ i }}"></a></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 	<div>

@@ -30,10 +30,8 @@ def addproblems():
     type = str(request.args.get('sol'))
     if request.method == 'POST':
         problem = new_problem(request)
-        print(request.form)
-        print(request.form.getlist('sample[]'))
         print(problem)
-        #db['problems'].insert_one(problem)
+        db['problems'].insert_one(problem)
 
     return render_template("admin/problemscontrol.html", type = type)
 

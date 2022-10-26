@@ -1,8 +1,8 @@
 function add_sample(){
     section = document.getElementById('io-sample');
-    section.innerHTML += `<div class='io-f'><textarea type='text' class='form-control io-format samples' name='sample[]' `+   
+    section.innerHTML += `<div class='io-f'><textarea type='text' class='form-control io-format samples' name='i_sample[]' `+   
     `placeholder='input sample ${section.children.length +1}'required></textarea><div class='io-f-space'></div><textarea type='text' class='form-control io-format samples'`+
-    `name='sample[]'placeholder='output sample ${section.children.length +1}'required></textarea></div>`;
+    `name='o_sample[]'placeholder='output sample ${section.children.length +1}'required></textarea></div>`;
 }
 function del_sample(){
     section = document.getElementById('io-sample');

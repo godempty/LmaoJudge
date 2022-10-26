@@ -1,14 +1,16 @@
-<link rel="stylesheet" href="{{ url_for("static", filename = "css/problem_page.css") }}">
+<link rel="stylesheet" href='{{ url_for("static", filename = "css/problem_page.css") }}'>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% extends "base.html" %}
 {% block content %}
 
-<h2>name_of_the_problem</h2>
-<div id="id_box">{{ pid }}</div>
+<div>
+<h2>{{ problem['name'] }}</h2>
+<div id="id_box">{{ problem['pid'] }}</div>
+</div>
 <div class="two_col_80">
 	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%; justify-content: left;">
-		<a id="submitbut" href="/submit/{{ pid }}">Submit</a>
+		<a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
 		<a id="allsubbut" href="/">All Submission</a>
 		<a id="mysubbut" href="/">My Submission</a>
 		<a id="rankbut" href="/">Rank</a>
@@ -16,38 +18,28 @@
 
 	<div class="box" style="width: 98%;">
 		<div class="caption">Statement</div>
-		<div>
-			test statement \(dp[i]\)
-		</div>
+		<pre> {{ problem['statement'] }}</pre>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Input</div>
-		<div>
-			10
-		</div>
+		<pre> {{ problem['i_format'] }}</pre>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Output</div>
-		<div>
-			123<br>nl
-		</div>
+		<pre> {{ problem['o_format'] }}</pre>
 	</div>
-
-	<div class="box two_col_half">
-		<div class="caption tocopy">Sample Input 1 <input type="button" value="copy"></div>
-		<div>
-			123123123
+	{% for i in range(lens) %}
+		<div class="box two_col_half">
+			<div class="caption tocopy">Sample Input {{ i+1 }} <input type="button" value="copy"></div>
+			<pre> {{ problem['i_sample'][i] }}</pre>
 		</div>
-	</div>
-
-	<div class="box two_col_half">
-		<div class="caption tocopy">Sample Output 1 <input type="button" value="copy"></div>
-		<div>
-			lol
+		<div class="box two_col_half">
+			<div class="caption tocopy">Sample Output {{ i+1 }} <input type="button" value="copy"></div>
+			<pre> {{ problem['o_sample'][i] }}</pre>
 		</div>
-	</div>
+	{% endfor %}
 </div>
 
 <div class="two_col_20">
@@ -57,11 +49,11 @@
 			<tbody>
 				<tr>
 					<th>Author</th>
-					<td>laialan</td>
+					<td>{{ problem['Author'] }}</td>
 				</tr>
 				<tr>
 					<th>Tags</th>
-					<td>weak</td>
+					<td>{{ problem['tag'] }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -72,11 +64,11 @@
 			<tbody>
 				<tr>
 					<th>Time Limit</th>
-					<td>1s</td>
+					<td>{{ problem['time_limit'] }}</td>
 				</tr>
 				<tr>
 					<th>Memory Limit</th>
-					<td>128MB</td>
+					<td>{{ problem['memory_limit'] }}</td>
 				</tr>
 			</tbody>
 		</table>

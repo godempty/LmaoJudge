@@ -53,7 +53,7 @@
                     <textarea 
                         type="text"
                         class="form-control io-format samples"
-                        name="sample[]"
+                        name="i_sample[]"
                         placeholder="input sample 1"
                         required
                     ></textarea>
@@ -61,7 +61,7 @@
                     <textarea 
                         type="text"
                         class="form-control io-format samples"
-                        name="sample[]"
+                        name="o_sample[]"
                         placeholder="output sample 1"
                         required
                     ></textarea>
@@ -138,14 +138,23 @@
             <div class="io-f-space"></div>
             <div class="width-100p box box-io">
                 <div class="caption">
-                    Notes
+                    Notes&Tags
                 </div>
                 <div class="io-f">                 
                     <textarea 
                     type="text"
+                    style="width: 69.75%; margin-right: 0.25%"
                     class="form-control io-format samples"
                     name="notes"
                     placeholder="notes"
+                    required
+                    ></textarea>
+                    <textarea 
+                    type="text"
+                    style="width: 29.75%; margin-left: 0.25%"
+                    class="form-control io-format samples"
+                    name="tags"
+                    placeholder="tags"
                     required
                     ></textarea>
                 </div>
