@@ -31,8 +31,11 @@
             </tr>
             {% for i in range(10) %}
             <tr>
-                <th scope="row">{{ i }}</th>
-                <td><a href="/problems/{{ i }}"></a></td>
+                <th scope="row">{{ i+1 }}</th>
+                <td><a href="/problems/{{ i+1 }}">test{{i+1}}</a></td>
+                <td class="hid-info">@@@</td>
+                <td>@@@</td>
+                <td class="hid-info">@@@</td>
             </tr>
             {% endfor %}
         </tbody>
