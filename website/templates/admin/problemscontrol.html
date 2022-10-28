@@ -4,23 +4,28 @@
 
 <div class="box add-box">
     <div class="caption">New Problem</div>
-    <form class="form-group add-form problem-form" id="add-problem" name="addproblem" method="POST">
+    <form  enctype="multipart/form-data" class="form-group add-form problem-form" id="add-problem" name="addproblem" method="POST">
         <input 
-            type="text"
-            class="form-control" 
-            style="margin-top: 0.7%;"
-            name="name"
-            placeholder="Name of the problem"
-            required
+        type="text"
+        class="form-control" 
+        style="margin-top: 0.7%;"
+        name="name"
+        placeholder="Name of the problem"
+        required
         />
         <textarea
-            type="text"
-            class="form-control problem-text"
-            name="statement" 
-            placeholder="statement"
-            required
+        type="text"
+        class="form-control problem-text"
+        name="statement" 
+        placeholder="statement"
+        required
         ></textarea>
-
+        <div class="width-100p box">
+            <div class="caption">
+                <label for="test_data">Test Data</label>
+            </div>
+            <input type="file" id="test_data" name="test_data" accept=".zip" required>
+        </div>
         <div class="width-100p box box-io">
             <div class="caption"> In/Out Format </div>
             <div class="io-f">
@@ -162,8 +167,6 @@
         </div>
         <button style="margin-top: 0.7%;" type="submit" class="btn btn-dark">Add Problem</button>
     </form>
-    <script>
-    </script>
 </div>
 
 

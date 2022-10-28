@@ -1,6 +1,8 @@
 from datetime import date, datetime
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, url_for
 from bson.objectid import ObjectId
+from os import path
+from zipfile import ZipFile
 from .model import new_problem
 from .db import db
 
@@ -30,8 +32,14 @@ def addproblems():
     type = str(request.args.get('sol'))
     if request.method == 'POST':
         problem = new_problem(request)
-        print(problem)
-        db['problems'].insert_one(problem)
+        zip_data = request.files['test_data']
+        zip_obj_data = zip_data.stream._file
+        datas = ZipFile(zip_obj_data)
+        filenames = datas.namelist()
+        filenames = [f_name for f_name in filenames if f_name.endswith('.in')] 
+        datas.extractall(path=f"D:/coding/LmaoJudge/test_data/{problem['pid']}", members=filenames)
+        #print(test_data.read())
+        #db['problems'].insert_one(problem)
 
     return render_template("admin/problemscontrol.html", type = type)
 

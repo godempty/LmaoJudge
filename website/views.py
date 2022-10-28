@@ -4,6 +4,7 @@ from .model import new_submission
 from .judging import judgement
 from bson.objectid import ObjectId
 from bson import json_util
+from werkzeug.utils import secure_filename
 import json, threading
 views = Blueprint('views', __name__)
 
