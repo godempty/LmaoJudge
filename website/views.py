@@ -1,13 +1,15 @@
+from re import search
 from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from .db import db
 from .model import new_submission
 from .judging import judgement
 from bson.objectid import ObjectId
 from bson import json_util
-from werkzeug.utils import secure_filename
+
 import json, threading
 views = Blueprint('views', __name__)
 
+problem_counts = db['count'].find_one({"name": "problem"},{'_id':0, 'count': 1})['count']
 # @ is the way to create(define) blueprint
 @views.route('/')
 def home():
@@ -15,13 +17,24 @@ def home():
     return render_template("home.html", announce = announce)
 
 @views.route('/problems')
-def problems():
-    return render_template("problems.html")
+def show_problems():
+    page = int(request.args.get("page",0))
+    max_problem_page = problem_counts/20
+    max_problem_page = int(max_problem_page)
+    if(page > max_problem_page):
+        page = 0
+        redirect(f'/problems?page={max_problem_page}')
+    problems = db['problems'].find({"pid" : { "$gt" : page*20, "$lt": (page+1)*20 }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
+    # while problems.alive:
+    #     print(problems.next()['pid'])
+    return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page)
 
 @views.route('/problems/<pid>')
 def problem_page(pid):
     
     problem = db['problems'].find_one({"pid": int(pid)})
+    if not problem:
+        return render_template("/error/problem_not_exist.html")
     lens = len(problem['i_sample'])
     return render_template("problem_page.html", problem = problem, lens=lens)
 
@@ -68,6 +81,8 @@ def showannounce():
 @views.route('/submissions/<id>')
 def single_submission(id):
     get = db['submission_data'].find_one({'_id': int(id)})
+    if not get:
+        return render_template('/error/submission_not_exist.html')
     return render_template("single_submission.html", id=id, user=get['userid'], subtime=get['subtime'],
             lang=get['lang'], pid=get['prob'], code=get['code'].splitlines(), task=get['subtask'])
 

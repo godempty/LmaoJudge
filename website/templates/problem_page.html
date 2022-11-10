@@ -79,11 +79,15 @@
 			<tbody>
 				<tr>
 					<th>Topcoder</th>
-					<td>momo</td>
+					<td>{{ problem['topcoder'] }}</td>
 				</tr>
 				<tr>
-					<th>AC Rate</th>
-					<td>10%(1/10)</td>
+					<th>AC Rate (user)</th>
+					<td>{{problem['ac_user']}}%</td>
+				</tr>
+				<tr>
+					<th>AC Rate (submission)</th>
+					<td>{{ problem['ac_submission'] }}</td>
 				</tr>
 			</tbody>
 		</table>
