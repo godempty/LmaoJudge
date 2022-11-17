@@ -39,7 +39,7 @@ def addproblems():
         filenames = [f_name for f_name in filenames if f_name.endswith('.in')] 
         datas.extractall(path=f"D:/coding/LmaoJudge/test_data/{problem['pid']}", members=filenames)
         #print(test_data.read())
-        #db['problems'].insert_one(problem)
+        db['problems'].insert_one(problem)
 
     return render_template("admin/problemscontrol.html", type = type)
 

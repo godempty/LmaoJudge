@@ -22,9 +22,20 @@
         ></textarea>
         <div class="width-100p box">
             <div class="caption">
-                <label for="test_data">Test Data</label>
+                <label for="test_data">Test Data (Zip only)</label>
             </div>
             <input type="file" id="test_data" name="test_data" accept=".zip" required>
+        </div>
+        <div class="width-100p box box-io">
+            <div class="caption"> Subtask (Not Required) 
+                <div style="padding: 0% 0% 0% 0%">
+                    <button style="color: white;" class="btn btn-outline btn-sm" type="button" onclick="add_subtask()">add subtask</button> 
+                    <button style="color: white;" class="btn btn-outline btn-sm" type="button" onclick="del_subtask()">delete subtask</button> 
+                </div>      
+            </div>
+            <div id="subtask">
+
+            </div>
         </div>
         <div class="width-100p box box-io">
             <div class="caption"> In/Out Format </div>

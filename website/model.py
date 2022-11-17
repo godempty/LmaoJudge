@@ -24,6 +24,8 @@ def new_problem(request):
         "o_format": request.form.get('o_format'), #output format
         "i_sample": request.form.getlist('i_sample[]'),
         "o_sample": request.form.getlist('o_sample[]'),
+        "subtask_description": request.form.getlist('subtask_description[]'),
+        "subtask_range": request.form.getlist('subtask_range[]'),
         "checker": request.form.get('checker'),
         "solution-answer": solution_answer,
         "notes": request.form.get('notes'),
