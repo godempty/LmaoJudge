@@ -58,7 +58,7 @@ def submit(id):
 
         # create submission
         if session.get('user'):
-            subid = new_submission(code, lang, id, session['user'].name)
+            subid = new_submission(code, lang, id, session['user']['name'])
         else:
             return "<p> please logged in !</p>"
         # #judge in another thread

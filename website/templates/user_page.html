@@ -1,20 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="width-100p box">
-        <div class="width-100p caption">User Information</div>
-        <div style="padding: 0.8% 0% 0% 0.4%;">       
-            <p>Name : {{ show['name'] }}</p>
-            <p>Admin : 
-                {% if show['admin'] %}
-                yes
-                {% else %}
-                no
-                {% endif %}
-            </p>   
-            <p>Email : {{ show['email'] }}</p>
-            <p>AC : {{ show['AC'] }} </p>
-            <p>WA : {{ show['WA'] }} </p>
+<style>
+    th{
+        padding-left: 0px !important;
+    }
+</style>
+
+<div class="two_col_30">
+   <div style="margin: 25px 10px 10px 15px;">
+        <h3>this is profile picture</h3>
+        <h5 style="margin-top: 20px; margin-bottom: 20px;"><b>{{ show['name'] }}</b></h5>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Admin</th>
+                    <td>
+                        {% if show['admin'] %}
+                        yes
+                        {% else %}
+                        no
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ show['email'] }}</td>
+                </tr>
+                <tr>
+                    <th>AC count</th>
+                    <td>{{ show['AC'] }}</td>
+                </tr>
+                <tr>
+                    <th>AC count</th>
+                    <td>{{ show['WA'] }}</td>
+                </tr>
+            </table>
+        </div>
+        <a href="/" class="">Submission List</a>
+    </div>
+</div>
+
+<div class="two_col_70">
+    <div class="box" style="width: 100%;">
+        <div class="caption">Solved Tasks</div>
+        <div class="container">
+            <div class="row">
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+                <a class="col" href="/">123</a>
+            </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

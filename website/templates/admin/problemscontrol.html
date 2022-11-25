@@ -20,12 +20,27 @@
         placeholder="statement"
         required
         ></textarea>
-        <div class="width-100p box">
-            <div class="caption">
-                <label for="test_data">Test Data (Zip only)</label>
+        
+        <div style="display: flex">
+            <div class="width-100p box box-io">
+                <div class="caption">
+                    Test Data (Zip only)
+                </div>
+                <div class="io-f">          
+                    <input type="file" id="test_data" name="test_data" accept=".zip" required>
+                </div>
             </div>
-            <input type="file" id="test_data" name="test_data" accept=".zip" required>
+            <div class="io-f-space"></div>
+            <div class="width-100p box box-io">
+                <div class="caption">
+                    Test Case Amount
+                </div>
+                <div class="io-f">
+                    <input class="form-control" type="number" name="test_data_count" required>
+                </div>
+            </div>
         </div>
+
         <div class="width-100p box box-io">
             <div class="caption"> Subtask (Not Required) 
                 <div style="padding: 0% 0% 0% 0%">

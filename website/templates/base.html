@@ -42,7 +42,7 @@
                 {% if session['logged'] == True %}
                 <div class="navbar-nav ms-auto">
                     <a class="nav-item nav-link" id="seeuser" href="/user/{{session['user']['name']}}">{{session['user']['name']}}</a>
-                    <a class="nav-item nav-link" id="signOut" href="/log-out">Log Out</a>  
+                    <a class="nav-item nav-link" id="login" href="/log-out">Log Out</a>  
                 </div>
                 {% else %}
                     <div class="navbar-nav ms-auto">

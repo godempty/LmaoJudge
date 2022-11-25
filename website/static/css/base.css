@@ -129,6 +129,16 @@ nav{
 		width: 98%;
 	}
 }
+.two_col_70{
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+}
+.two_col_30{
+	display: inline-block;
+	vertical-align: top;
+	width: 29%;
+}
 .two_col_80{
 	display: inline-block;
 	vertical-align: top;
@@ -143,10 +153,7 @@ nav{
 	width: 98%;
 }
 @media (max-width: 1000px){
-	.two_col_80{
-		width: 98%;
-	}
-	.two_col_20{
+	.two_col_20, .two_col_80, .two_col_30, .two_col_70{
 		width: 98%;
 	}
 }

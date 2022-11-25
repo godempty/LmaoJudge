@@ -42,7 +42,7 @@
 				<td>{{ data['author'] }}</td>
 				<td><a href='/announce/{{ data["_id"] }}'>{{ data['title'] }}</a></td>
 				<td>{{ data['time'] }}</td>
-                <td><a class="btn btn-danger" href="/admin/announcedelete/{{ data['_id'] }}">Delete</a></td>
+                <td><a class="btn btn-danger" style="color:rgb(241, 246, 216);" href="/admin/announcedelete/{{ data['_id'] }}">Delete</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

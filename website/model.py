@@ -2,6 +2,7 @@ from bson.objectid import ObjectId
 from datetime import datetime
 from flask import session
 from .db import db
+
 def new_problem(request):
     cnt = db['count'].find_one({"name": "problem"})
     count = cnt['count']+1
@@ -24,6 +25,7 @@ def new_problem(request):
         "o_format": request.form.get('o_format'), #output format
         "i_sample": request.form.getlist('i_sample[]'),
         "o_sample": request.form.getlist('o_sample[]'),
+        "test_count": request.form.get('test_data_count'),
         "subtask_description": request.form.getlist('subtask_description[]'),
         "subtask_range": request.form.getlist('subtask_range[]'),
         "checker": request.form.get('checker'),
