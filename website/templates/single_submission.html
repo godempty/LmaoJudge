@@ -32,31 +32,32 @@
 	<table class="table" id="small">
 		<tbody>
 			<tr>
-				<th>Submission ID</th>
+				<th id="colorhead">Submission ID</th>
 				<td>{{ id }}</td>
 			</tr>
 			<tr>
-				<th>Problem ID</th>
+				<th id="colorhead">Problem ID</th>
 				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
 			</tr>
 			<tr>
-				<th>Submit Time</th>
+				<th id="colorhead">Submit Time</th>
 				<td>{{ subtime }}</td>
 			</tr>
 			<tr>
-				<th>User</th>
+				<th id="colorhead">User</th>
 				<td>{{ user }}</td>
 			</tr>
 			<tr>
-				<th>Final Verdict</th>
+				<th id="colorhead">Final Verdict</th>
 				<td><span id="verdict">loading..</span></td>
 			</tr>
 			<tr>
-				<th>Language</th>
+				<th id="colorhead">Language</th>
 				<td>{{ lang }}</td>
 			</tr>
 		</tbody>
 	</table>
+	<div id="errmsg"></div>
 </div>
 <div id="codeblock">
 	<table>
@@ -111,8 +112,10 @@ var upd = setInterval(function(){
 					if(ret.subtask[curi][curj][0] != ""){
 						const info = document.getElementById('tk' + String(curi+curj))
 						info.childNodes[3].innerText = ret.subtask[curi][curj][0]
-						info.childNodes[5].innerText = ret.subtask[curi][curj][1] + " ms"
-						info.childNodes[7].innerText = ret.subtask[curi][curj][2] + " kb"
+						if(ret.subtask[curi][curj][0] != 'abort'){
+							info.childNodes[5].innerText = ret.subtask[curi][curj][1] + " ms"
+							info.childNodes[7].innerText = ret.subtask[curi][curj][2] + " kb"
+						}
 						curj += 1
 					}
 					else break
@@ -123,18 +126,24 @@ var upd = setInterval(function(){
 			if(ret.done == 1){
 				verd.innerText = ret.verdict
 				clearInterval(upd)
+
 				// colors for different results
 				const color = document.getElementById('colorhead')
-				if(ret.verdict == 'compile error'){
+				if(ret.verdict == 'CE'){
 					for(let i=0;i<ret.subtask.length;++i) for(let j=0;j<ret.subtask[i].length;++j){
 						const info = document.getElementById('tk' + String(i + j))
-						info.childNodes[3].innerText = 'CE'
+						info.childNodes[3].innerText = 'abort'
 					}
 					color.style = 'background-color: lightgoldenrodyellow'
 				}
 				else if(ret.verdict == 'AC') color.style = 'background-color: palegreen'
 				else if(ret.verdict == 'WA') color.style = 'background-color: #ebccd1'
 				else if(ret.verdict == 'TLE') color.style = 'background-color: lightsteelblue'
+
+				// show error message
+				if(ret.err != ''){
+					document.getElementById('errmsg').innerText = ret.err
+				}
 			}
 		}
 	}

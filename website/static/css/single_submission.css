@@ -11,6 +11,9 @@
 #small{
 	display: none;
 }
+#small th{
+	width: 30%;
+}
 
 @media (max-width: 800px){
 	#small{
@@ -19,4 +22,10 @@
 	#large{
 		display: none;
 	}
+}
+
+#errmsg{
+	background-color: lightyellow;
+	width: 100%;
+	font-family: monospace;
 }

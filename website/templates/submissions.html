@@ -4,30 +4,32 @@
 
 <div class="box" style="width: 100%;">
 	<div class="caption">Submissions</div>
-    <table class="table table-striped table-hover">
-        <thead style="font-weight: bold;">
-            <tr>
-                <th style="width: 10%;">Submission ID</th>
-                <th>Problem ID</th>
-                <th style="width: 30%;">Submitter</th>
-                <th>Result</th>
-                <th>Language</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in data %}
-                <tr>
-                    <th><a href="/submissions/{{ i['_id'] }}">{{ i['_id'] }}</a></th>
-                    <th><a href="/problems/{{ i['prob'] }}">{{ i['prob'] }}</a></th>
-                    <th><a href="/{{ i['userid'] }}">{{ i['userid'] }}</a></th>
-                    <th>{{ i['verdict'] }}</th>
-                    <th>{{ i['lang'] }}</th>
-                    <th>{{ i['subtime'] }}</th>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<div class="table-responsive" style="padding: 0 0 0 0;">
+		<table class="table table-striped table-hover">
+			<thead style="font-weight: bold;">
+				<tr>
+					<th style="width: 10%;">Submission ID</th>
+					<th>Problem ID</th>
+					<th style="width: 30%;">Submitter</th>
+					<th>Result</th>
+					<th>Language</th>
+					<th>Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in data %}
+					<tr>
+						<th><a href="/submissions/{{ i['_id'] }}">{{ i['_id'] }}</a></th>
+						<th><a href="/problems/{{ i['prob'] }}">{{ i['prob'] }}</a></th>
+						<th><a href="/{{ i['userid'] }}">{{ i['userid'] }}</a></th>
+						<th>{{ i['verdict'] }}</th>
+						<th>{{ i['lang'] }}</th>
+						<th>{{ i['subtime'] }}</th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 	<div>
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="/">&lt;</a></li>

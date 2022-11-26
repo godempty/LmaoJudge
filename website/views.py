@@ -9,7 +9,6 @@ from bson import json_util
 import json, threading
 views = Blueprint('views', __name__)
 
-problem_counts = db['count'].find_one({"name": "problem"},{'_id':0, 'count': 1})['count']
 # @ is the way to create(define) blueprint
 @views.route('/')
 def home():
@@ -18,12 +17,12 @@ def home():
 
 @views.route('/problems')
 def show_problems():
+    problem_counts = db['count'].find_one({"name": "problem"})['count']
     page = int(request.args.get("page",0))
-    max_problem_page = problem_counts/20
-    max_problem_page = int(max_problem_page)
+    max_problem_page = int(problem_counts/20)
     if(page > max_problem_page):
-        page = 0
-        redirect(f'/problems?page={max_problem_page}')
+        return redirect(f'/problems?page={max_problem_page}')
+
     problems = db['problems'].find({"pid" : { "$gt" : page*20, "$lt": (page+1)*20 }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
     # while problems.alive:
     #     print(problems.next()['pid'])
@@ -44,10 +43,18 @@ def contests():
 
 @views.route('/submissions_list/')
 def submissions_list():
-    num_per_page = 20
-    page = int(request.args.get("page", 0))
-    # data = db['submission_data'].find({'_id': {'$gte': cur_num - num_per_page*(page+1), '$lt': cur_num+1 - num_per_page*page}}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1})
-    data = db['submission_data'].find({}, {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1}).sort('$natural', -1).limit(num_per_page)
+    per_page = 10
+    all_cnt = db['count'].find_one({"name": "submission"})['count']
+    page = int(request.args.get("page",0))
+    max_page = int(all_cnt/per_page)
+    if(page > max_page):
+        return redirect(f'/submissions_list?page={max_page}')
+
+    data = db['submission_data'].find({'_id': {
+        '$gte': max(1, all_cnt-(page+1)*per_page+1),
+        '$lte': all_cnt-page*per_page}},
+        {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1}).sort("_id", -1)
+
     return render_template("submissions.html", data = data)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
@@ -92,7 +99,7 @@ def single_submission(id):
 @views.route('/submissions/<id>/get_data')
 def get_submission_data(id):
     get = db['submission_data'].find_one({'_id': int(id)})
-    return jsonify({'done': get['done'], 'subtask': get['subtask'], 'verdict': get['verdict']})
+    return jsonify({'done': get['done'], 'subtask': get['subtask'], 'verdict': get['verdict'], 'err': get['error_msg']})
 
 @views.route('/user/<username>')
 def show_user(username):

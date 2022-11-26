@@ -40,7 +40,7 @@ def default_runner(pid, test_number, lang, tl, exe_file, ml):
 
         #verdict
         if(execute.returncode != 0):
-            return [0, tend, memUse[1]]
+            return [0, tend, memUse[1], ret[1]]
 
         # set up for answer comparing
         res_list = [k for k in ret[0].split('\n')]
@@ -55,14 +55,14 @@ def default_runner(pid, test_number, lang, tl, exe_file, ml):
         inputs.close()
         
         if(res_list == ans_list):
-            return [3, tend, memUse[1]]
+            return [3, tend, memUse[1], '']
         else:
-            return [2, tend, memUse[1]]
+            return [2, tend, memUse[1], '']
 
     except subprocess.TimeoutExpired:
         inputs.close()
         execute.kill()
-        return [1, round((time.time() - tstart) * 1000.0, 2), 0]
+        return [1, round((time.time() - tstart) * 1000.0, 2), 0, '']
 
 def judgement(pid, code, lang, subid):
     # name of executable
@@ -76,7 +76,7 @@ def judgement(pid, code, lang, subid):
         compil = subprocess.run(['g++', '-o', exe_file, '-xc++', '-'], text=True, input=code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print(exe_file)
         if(compil.returncode == 1):
-            subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'compile error'}})
+            subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'CE', 'error_msg': compil.stderr}})
             return
     elif(lang == 'python3'):
         exe_file += '.py'
@@ -94,14 +94,24 @@ def judgement(pid, code, lang, subid):
     #start testing
     prev_test = 1
     cur_subtask = 0
+    abort = 0
     for k in prob_data['subtask_range']:
         k = int(k)
         for i in range(prev_test, k+1):
+            if(abort):
+                subdata.update_one({'_id': subid}, {'$set': {'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): ['abort', 0, 0]}})
+                continue;
+
             get = default_runner(pid, i, lang, int(prob_data['time_limit']), exe_file, int(prob_data['memory_limit']))
             save[get[0]] = 1
             maxtime = max(maxtime, get[1])
             maxmem = max(maxmem, get[2])
-            subdata.update_one({'_id': subid}, {'$set': {'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): [name[get[0]], get[1], get[2]]}})
+            subdata.update_one({'_id': subid}, {'$set': {
+                'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): [name[get[0]], get[1], get[2]],
+                'error_msg': get[3]
+            }})
+            if(get[0] == 0):
+                abort = 1
         
         prev_test = k+1
         cur_subtask += 1
