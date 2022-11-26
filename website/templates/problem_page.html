@@ -11,8 +11,10 @@
 <div class="two_col_80">
 	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%; justify-content: left;">
 		<a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
-		<a id="allsubbut" href="/">All Submission</a>
-		<a id="mysubbut" href="/">My Submission</a>
+		<a id="allsubbut" href="/submissions_list/?pid={{ problem['pid'] }}">All Submission</a>
+		{% if logged %}
+			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user={{ name }}">My Submission</a>
+		{% endif %}
 		<a id="rankbut" href="/">Rank</a>
 	</div>
 

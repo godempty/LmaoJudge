@@ -34,8 +34,12 @@ def problem_page(pid):
     problem = db['problems'].find_one({"pid": int(pid)})
     if not problem:
         return render_template("/error/problem_not_exist.html")
+
     lens = len(problem['i_sample'])
-    return render_template("problem_page.html", problem = problem, lens=lens)
+    name = 0
+    if(session.get('user')):
+        name = session['user']['name']
+    return render_template("problem_page.html", problem = problem, lens=lens, logged=session.get('user'), name = name)
 
 @views.route('/contests')
 def contests():
@@ -43,17 +47,27 @@ def contests():
 
 @views.route('/submissions_list/')
 def submissions_list():
-    per_page = 10
-    all_cnt = db['count'].find_one({"name": "submission"})['count']
-    page = int(request.args.get("page",0))
-    max_page = int(all_cnt/per_page)
-    if(page > max_page):
-        return redirect(f'/submissions_list?page={max_page}')
+    query = dict()
 
-    data = db['submission_data'].find({'_id': {
-        '$gte': max(1, all_cnt-(page+1)*per_page+1),
-        '$lte': all_cnt-page*per_page}},
+    #query user
+    get = request.args.get("user", None)
+    if(get):
+        query['userid'] = get
+    #query problem
+    get = request.args.get("pid", None)
+    if(get):
+        query['prob'] = get
+
+    data = db['submission_data'].find(query,
         {'verdict': 1, 'lang': 1, 'prob': 1, 'subtime': 1, 'userid': 1}).sort("_id", -1)
+
+    #page
+    per_page = 10
+    page = int(request.args.get("page",0))
+    if(page < 0):
+        return redirect('/submissions_list?page=0')
+
+    data.skip(page*per_page).limit(per_page)
 
     return render_template("submissions.html", data = data)
 
