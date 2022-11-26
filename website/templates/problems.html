@@ -33,17 +33,21 @@
     </table>
 	<div>
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="/">&lt;</a></li>
-            {% if max_problem_page >= page+6 %}
-                {% for i in range(page, page+6) %}
-                    <li class="page-item"><a class="page-link" href="/problems?page={{ i }}">{{ i }}</a></li>
-                {% endfor %}
-            {% else %}
-                {% for i in range(page, max_problem_page+1) %}
-                    <li class="page-item"><a class="page-link" href="/problems?page={{ i }}">{{ i }}</a></li>
-                {% endfor %}
-            {% endif %}
-			<li class="page-item"><a class="page-link" href="/">&gt;</a></li>
+			{% if page > 0 %}
+			<li class="page-item"><a class="page-link" href="/problems?page={{ page-1 }}">&lt;</a></li>
+			{% endif %}
+
+			{% for i in range(left, page+1) %}
+				<li class="page-item"><a class="page-link" href="/problems?page={{ i }}">{{ i }}</a></li>
+			{% endfor %}
+
+			{% for i in range(page+1, right) %}
+				<li class="page-item"><a class="page-link" href="/problems?page={{ i }}">{{ i }}</a></li>
+			{% endfor %}
+
+            {% if page < max_problem_page %}
+			<li class="page-item"><a class="page-link" href="/problems?page={{ page+1 }}">&gt;</a></li>
+			{% endif %}
 		</ul>
 	</div>
 </div>

@@ -22,7 +22,7 @@
 						<th><a href="/submissions/{{ i['_id'] }}">{{ i['_id'] }}</a></th>
 						<th><a href="/problems/{{ i['prob'] }}">{{ i['prob'] }}</a></th>
 						<th><a href="/{{ i['userid'] }}">{{ i['userid'] }}</a></th>
-						<th>{{ i['verdict'] }}</th>
+						<th class="result">{{ i['verdict'] }}</th>
 						<th>{{ i['lang'] }}</th>
 						<th>{{ i['subtime'] }}</th>
 					</tr>
@@ -32,13 +32,32 @@
 	</div>
 	<div>
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="/">&lt;</a></li>
-			{% for i in range(4) %}
-				<li class="page-item"><a class="page-link" href="/submissions_list/?page={{ i }}">{{ i }}</a></li>
+			{% if page > 0 %}
+			<li class="page-item"><a class="page-link" href="/submissions_list?page={{ page-1 }}">&lt;</a></li>
+			{% endif %}
+
+			{% for i in range(left, page) %}
+				<li class="page-item"><a class="page-link" href="/submissions_list?page={{ i }}">{{ i }}</a></li>
 			{% endfor %}
-			<li class="page-item"><a class="page-link" href="/">&gt;</a></li>
+
+			<li class="page-item"><a class="page-link" id="cur_page" href="/submissions_list?page={{ page }}">{{ page }}</a></li>
+
+			{% for i in range(page+1, right) %}
+				<li class="page-item"><a class="page-link" href="/submissions_list?page={{ i }}">{{ i }}</a></li>
+			{% endfor %}
+
+            {% if page < max_problem_page %}
+			<li class="page-item"><a class="page-link" href="/submissions_list?page={{ page+1 }}">&gt;</a></li>
+			{% endif %}
 		</ul>
 	</div>
 </div>
+
+<script type="text/javascript">
+	const get = document.getElementsByClassName('result')
+	for(var sub of get){
+		sub.style = "background-color:"+get_color(sub.innerText)
+	}
+</script>
 
 {% endblock %}

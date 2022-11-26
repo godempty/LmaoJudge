@@ -20,13 +20,13 @@ def show_problems():
     problem_counts = db['count'].find_one({"name": "problem"})['count']
     page = int(request.args.get("page",0))
     max_problem_page = int(problem_counts/20)
-    if(page > max_problem_page):
-        return redirect(f'/problems?page={max_problem_page}')
+    page = min(page, max_problem_page)
+    page = max(0, page)
 
     problems = db['problems'].find({"pid" : { "$gt" : page*20, "$lt": (page+1)*20 }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
     # while problems.alive:
     #     print(problems.next()['pid'])
-    return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page)
+    return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))
 
 @views.route('/problems/<pid>')
 def problem_page(pid):
@@ -36,10 +36,7 @@ def problem_page(pid):
         return render_template("/error/problem_not_exist.html")
 
     lens = len(problem['i_sample'])
-    name = 0
-    if(session.get('user')):
-        name = session['user']['name']
-    return render_template("problem_page.html", problem = problem, lens=lens, logged=session.get('user'), name = name)
+    return render_template("problem_page.html", problem = problem, lens=lens)
 
 @views.route('/contests')
 def contests():
@@ -63,13 +60,15 @@ def submissions_list():
 
     #page
     per_page = 10
+    problem_counts = db['count'].find_one({"name": "submission"})['count']
     page = int(request.args.get("page",0))
-    if(page < 0):
-        return redirect('/submissions_list?page=0')
+    max_problem_page = int(problem_counts/per_page)
+    page = min(page, max_problem_page)
+    page = max(0, page)
 
     data.skip(page*per_page).limit(per_page)
 
-    return render_template("submissions.html", data = data)
+    return render_template("submissions.html", data = data, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):

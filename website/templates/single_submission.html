@@ -134,11 +134,8 @@ var upd = setInterval(function(){
 						const info = document.getElementById('tk' + String(i + j))
 						info.childNodes[3].innerText = 'abort'
 					}
-					color.style = 'background-color: lightgoldenrodyellow'
 				}
-				else if(ret.verdict == 'AC') color.style = 'background-color: palegreen'
-				else if(ret.verdict == 'WA') color.style = 'background-color: #ebccd1'
-				else if(ret.verdict == 'TLE') color.style = 'background-color: lightsteelblue'
+				color.style = "background-color: "+get_color(ret.verdict)
 
 				// show error message
 				if(ret.err != ''){

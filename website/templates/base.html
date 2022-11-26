@@ -12,6 +12,15 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/base.css') }}">
         <script src="{{ url_for('static', filename = 'js/admin.js') }}"></script>
         <title>{% block title %}Home{% endblock %}</title>
+		<script>
+			function get_color(color){
+				if(color == 'CE') return 'lightgoldenrodyellow'
+				else if(color == 'AC') return 'palegreen'
+				else if(color == 'WA') return 'tomato'
+				else if(color == 'TLE') return 'lightsteelblue'
+				else if(color == 'RE') return 'snow'
+			}
+		</script>
     </head>
     <body>
 		<!--navigation bar-->
