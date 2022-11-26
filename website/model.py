@@ -41,16 +41,23 @@ def new_submission(code, lang, pid, user):
     subid = db['count'].find_one({"name": 'submission'})['count']+1
     db['count'].update_one({"name": 'submission'}, {'$set': {'count': subid}})
 
-    data = db['problem_test_data'].find_one({'_id': int(pid)})
+    data = db['problems'].find_one({'pid': int(pid)})
+
     today = datetime.now()
     ret = {'_id': subid, 'done': 0, 'code': code, 'lang': lang, 'prob': pid, 'subtask': list(),
             'verdict': '', 'exetime': 0, 'exemem': 0,
             'subtime': f"{today.year}/{today.month}/{today.day}", 'userid': 0}
-    for i in data['subtasks']:
+
+    cur_test_cnt = 1
+    for k in data['subtask_range']:
         ret['subtask'].append(list())
-        for j in range(i['total']):
+        k = int(k)
+        for i in range(cur_test_cnt, k+1):
             ret['subtask'][-1].append(['', 0, 0]) #verdict time memory
 
+        cur_test_cnt = k+1
+
+    # print(ret['subtask'])
     db['submission_data'].insert_one(ret)
 
     return subid

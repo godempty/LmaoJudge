@@ -19,7 +19,7 @@ def default_runner(pid, test_number, lang, tl, exe_file, ml):
     # assign run command for specific language
     if(lang == 'c++'):
         cmd = [exe_file]
-    elif(lang == 'python3'):
+    elif(lang == 'python'):
         cmd = ['python3', exe_file]
     
     try:
@@ -78,7 +78,7 @@ def judgement(pid, code, lang, subid):
         if(compil.returncode == 1):
             subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'compile error'}})
             return
-    elif(lang == 'python3'):
+    elif(lang == 'python'):
         exe_file += '.py'
         wt = open(exe_file, 'w')
         wt.write(code)

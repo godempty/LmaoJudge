@@ -59,11 +59,11 @@
             {% for category, message in messages %}
             {% if category == 'error' %}
             <div class="alert alert-danger alert-dismissable fade show" role = "alert" style="margin-top: 9px;">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<span>{{ message }}</span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             {% else %}
-            <div class="alert alert-success alert-dismissable fade show" role = "alert">
+            <div class="alert alert-success alert-dismissable fade show" role = "alert" style="margin-top: 9px;">
                 {{message}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>

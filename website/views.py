@@ -1,5 +1,5 @@
 from re import search
-from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
+from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify, flash
 from .db import db
 from .model import new_submission
 from .judging import judgement
@@ -52,16 +52,18 @@ def submissions_list():
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):
+    if(not session.get('user')):
+        flash('You Have To Login', category='error')
+        return redirect(url_for('views.problem_page', pid=id))
+
     if(request.method == 'POST'):
         code = request.form['code']
         lang = request.form['lang']
 
         # create submission
-        if session.get('user'):
-            subid = new_submission(code, lang, id, session['user']['name'])
-        else:
-            return "<p> please logged in !</p>"
-        # #judge in another thread
+        subid = new_submission(code, lang, id, session['user']['name'])
+
+        #judge in another thread
         td = threading.Thread(target = judgement, args = [id, code, lang, subid])
         td.start()
         return redirect(url_for('views.single_submission', id=subid))
