@@ -42,11 +42,11 @@
 
 			<li class="page-item"><a class="page-link" id="cur_page" href="/submissions_list?page={{ page }}">{{ page }}</a></li>
 
-			{% for i in range(page+1, right) %}
+			{% for i in range(page+1, right+1) %}
 				<li class="page-item"><a class="page-link" href="/submissions_list?page={{ i }}">{{ i }}</a></li>
 			{% endfor %}
 
-            {% if page < max_problem_page %}
+            {% if page < max_page %}
 			<li class="page-item"><a class="page-link" href="/submissions_list?page={{ page+1 }}">&gt;</a></li>
 			{% endif %}
 		</ul>

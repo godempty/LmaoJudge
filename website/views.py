@@ -60,15 +60,15 @@ def submissions_list():
 
     #page
     per_page = 10
-    problem_counts = db['count'].find_one({"name": "submission"})['count']
+    all_cnt = db['count'].find_one({"name": "submission"})['count']
     page = int(request.args.get("page",0))
-    max_problem_page = int(problem_counts/per_page)
-    page = min(page, max_problem_page)
+    max_page = int(all_cnt/per_page)
+    page = min(page, max_page)
     page = max(0, page)
 
     data.skip(page*per_page).limit(per_page)
 
-    return render_template("submissions.html", data = data, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))
+    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6))
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):
