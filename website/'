@@ -1,5 +1,0 @@
-import os
-exe_file = os.path.abspath(os.path.dirname(__file__) + '/exes/'+'1.py')
-print(os.path.dirname)
-# wt = open('exes/1.py', 'w')
-# wt.write("12312\nwoefuwef\n0982342")
