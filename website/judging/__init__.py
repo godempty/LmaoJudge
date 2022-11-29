@@ -1,5 +1,5 @@
 from ..db import db
-import subprocess, os, time, psutil, threading
+import subprocess, os, time, psutil, platform
 
 def monitor_mem(arg):
     pid = arg[0]
@@ -74,7 +74,6 @@ def judgement(pid, code, lang, subid):
     # compile / put code into file
     if(lang == 'c++'):
         compil = subprocess.run(['g++', '-o', exe_file, '-xc++', '-'], text=True, input=code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(exe_file)
         if(compil.returncode == 1):
             subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'CE', 'error_msg': compil.stderr}})
             return
@@ -100,7 +99,7 @@ def judgement(pid, code, lang, subid):
         for i in range(prev_test, k+1):
             if(abort):
                 subdata.update_one({'_id': subid}, {'$set': {'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): ['abort', 0, 0]}})
-                continue;
+                continue
 
             get = default_runner(pid, i, lang, int(prob_data['time_limit']), exe_file, int(prob_data['memory_limit']))
             save[get[0]] = 1
@@ -125,4 +124,7 @@ def judgement(pid, code, lang, subid):
     subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': verdict, 'exetime': maxtime}})
 
     #delete executable
-    os.remove(exe_file)
+    if(platform.system() == 'Windows'):
+        os.remove(exe_file+'.exe')
+    else:
+        os.remove(exe_file)

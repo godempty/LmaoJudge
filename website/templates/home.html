@@ -18,7 +18,7 @@
 		<tbody>
 			{% for data in announce %}
 			<tr>
-				<td>{{ data['author'] }}</td>
+				<td><a href="/user/{{ data['author']}}">{{ data['author'] }}</a></td>
 				<td><a href='/announce/{{data["_id"]}}'>{{ data['title'] }}</a></td>
 				<td>{{ data['time'] }}</td>
 			</tr>

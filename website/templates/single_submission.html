@@ -22,7 +22,7 @@
 			<tr>
 				<td>{{ id }}</td>
 				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
-				<td>{{ user }}</td>
+				<td><a href="/user/{{ user }}">{{ user }}</a></td>
 				<td><span id="verdict">loading..</span></td>
 				<td>{{ subtime }}</td>
 				<td>{{ lang }}</td>
@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<th id="colorhead">User</th>
-				<td>{{ user }}</td>
+				<td><a href="/user/{{ user }}">{{ user }}</a></td>
 			</tr>
 			<tr>
 				<th id="colorhead">Final Verdict</th>
@@ -83,7 +83,7 @@
 		{% for i in range(task|length) %}
 			{% for j in range(task[i]|length)%}
 			<tbody>
-				<tr id="tk{{ i+j }}">
+				<tr id="tk{{ i|string + j|string }}">
 					<td>{{ i+1 }}</td>
 					<td>running..</td>
 					<td>- ms</td>
@@ -110,7 +110,7 @@ var upd = setInterval(function(){
 				curj = 0
 				while(curj < ret.subtask[curi].length){
 					if(ret.subtask[curi][curj][0] != ""){
-						const info = document.getElementById('tk' + String(curi+curj))
+						const info = document.getElementById('tk' + String(curi) + String(curj))
 						info.childNodes[3].innerText = ret.subtask[curi][curj][0]
 						if(ret.subtask[curi][curj][0] != 'abort'){
 							info.childNodes[5].innerText = ret.subtask[curi][curj][1] + " ms"
@@ -131,7 +131,7 @@ var upd = setInterval(function(){
 				const color = document.getElementById('colorhead')
 				if(ret.verdict == 'CE'){
 					for(let i=0;i<ret.subtask.length;++i) for(let j=0;j<ret.subtask[i].length;++j){
-						const info = document.getElementById('tk' + String(i + j))
+						const info = document.getElementById('tk' + String(i) + String(j))
 						info.childNodes[3].innerText = 'abort'
 					}
 				}

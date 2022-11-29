@@ -5,43 +5,43 @@
 {% block content %}
 
 <div>
-<h2>{{ problem['name'] }}</h2>
-<div id="id_box">{{ problem['pid'] }}</div>
+	<h2>{{ problem['name'] }}</h2>
+	<div id="id_box">{{ problem['pid'] }}</div>
 </div>
 <div class="two_col_80">
 	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%; justify-content: left;">
-		{% if session['user'] %}
 		<a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
-		{% endif %}
 		<a id="allsubbut" href="/submissions_list/?pid={{ problem['pid'] }}">All Submission</a>
 		{% if session['user'] %}
 			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user={{ session['user']['name'] }}">My Submission</a>
+		{% else %}
+			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user=">My Submission</a>
 		{% endif %}
 		<a id="rankbut" href="/">Rank</a>
 	</div>
 
 	<div class="box" style="width: 98%;">
 		<div class="caption">Statement</div>
-		<pre> {{ problem['statement'] }}</pre>
+		<div> {{ problem['statement'] }}</div>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Input</div>
-		<pre> {{ problem['i_format'] }}</pre>
+		<div> {{ problem['i_format'] }}</div>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Output</div>
-		<pre> {{ problem['o_format'] }}</pre>
+		<div> {{ problem['o_format'] }}</div>
 	</div>
 	{% for i in range(lens) %}
 		<div class="box two_col_half">
 			<div class="caption tocopy">Sample Input {{ i+1 }} <input type="button" value="copy"></div>
-			<pre> {{ problem['i_sample'][i] }}</pre>
+			<pre style="margin-left: 3px;">{{ problem['i_sample'][i] }}</pre>
 		</div>
 		<div class="box two_col_half">
 			<div class="caption tocopy">Sample Output {{ i+1 }} <input type="button" value="copy"></div>
-			<pre> {{ problem['o_sample'][i] }}</pre>
+			<pre style="margin-left: 3px;">{{ problem['o_sample'][i] }}</pre>
 		</div>
 	{% endfor %}
 </div>
