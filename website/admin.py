@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from flask import Blueprint, render_template, request, redirect, session, url_for
 from bson.objectid import ObjectId
-from os import path
+import os
 from zipfile import ZipFile
 from .model import new_problem
 from .db import db
@@ -35,9 +35,9 @@ def addproblems():
         zip_data = request.files['test_data']
         zip_obj_data = zip_data.stream._file
         datas = ZipFile(zip_obj_data)
-        filenames = datas.namelist()
-        filenames = [f_name for f_name in filenames if f_name.endswith('.in')] 
-        datas.extractall(path=f"D:/coding/LmaoJudge/test_data/{problem['pid']}", members=filenames)
+        # filenames = [f_name for f_name in filenames if f_name.endswith('.in')] 
+        os.makedirs(f"test_data/{problem['pid']}")
+        datas.extractall(path=f"test_data/{problem['pid']}")
         #print(test_data.read())
         db['problems'].insert_one(problem)
 
