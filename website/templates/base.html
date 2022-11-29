@@ -66,17 +66,25 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
-            {% if category == 'error' %}
-            <div class="alert alert-danger alert-dismissable fade show" role = "alert" style="margin-top: 9px;">
-				<span>{{ message }}</span>
-				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            {% else %}
-            <div class="alert alert-success alert-dismissable fade show" role = "alert" style="margin-top: 9px;">
-                {{message}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            {% endif %}
+			{% if category == 'error' %}
+			<div class="position-fixed bottom-0 end-1 p-3" style="z-index: 11">
+				<div class="toast text-white bg-danger border-0 show fade" role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="d-flex">
+						<div class="toast-body">{{ message }}</div>
+						<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+			{% else %}
+			<div class="position-fixed bottom-0 end-1 p-3" style="z-index: 11">
+				<div class="toast text-white bg-primary border-0 show fade" role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="d-flex">
+						<div class="toast-body">{{ message }}</div>
+						<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+			{% endif %}
             {% endfor %}
         {% endif%}
         {% endwith %}

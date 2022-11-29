@@ -5,18 +5,14 @@
 {% block content %}
 
 <div>
-<h2>{{ problem['name'] }}</h2>
-<div id="id_box">{{ problem['pid'] }}</div>
+	<h2>{{ problem['name'] }}</h2>
+	<div id="id_box">{{ problem['pid'] }}</div>
 </div>
 <div class="two_col_80">
 	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%; justify-content: left;">
-		{% if session['user'] %}
 		<a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
-		{% endif %}
 		<a id="allsubbut" href="/submissions_list/?pid={{ problem['pid'] }}">All Submission</a>
-		{% if session['user'] %}
-			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user={{ session['user']['name'] }}">My Submission</a>
-		{% endif %}
+		<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user={{ session['user']['name'] }}">My Submission</a>
 		<a id="rankbut" href="/">Rank</a>
 	</div>
 

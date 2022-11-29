@@ -47,12 +47,16 @@ def submissions_list():
     query = dict()
 
     #query user
-    get = request.args.get("user", None)
-    if(get):
-        query['userid'] = get
+    if('user' in request.args):
+        get = request.args.get('user', '')
+        if(not get):
+            flash('You Have To Login', category='error')
+            return redirect(request.referrer)
+        else:
+            query['userid'] = get
     #query problem
-    get = request.args.get("pid", None)
-    if(get):
+    if('pid' in request.args):
+        get = request.args.get('pid', '')
         query['prob'] = get
 
     data = db['submission_data'].find(query,
@@ -68,7 +72,7 @@ def submissions_list():
 
     data.skip(page*per_page).limit(per_page)
 
-    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6))
+    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6), qry=request.query_string)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):
