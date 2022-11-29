@@ -18,26 +18,26 @@
 
 	<div class="box" style="width: 98%;">
 		<div class="caption">Statement</div>
-		<pre> {{ problem['statement'] }}</pre>
+		<div> {{ problem['statement'] }}</div>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Input</div>
-		<pre> {{ problem['i_format'] }}</pre>
+		<div> {{ problem['i_format'] }}</div>
 	</div>
 
 	<div class="box two_col_half">
 		<div class="caption">Output</div>
-		<pre> {{ problem['o_format'] }}</pre>
+		<div> {{ problem['o_format'] }}</div>
 	</div>
 	{% for i in range(lens) %}
 		<div class="box two_col_half">
 			<div class="caption tocopy">Sample Input {{ i+1 }} <input type="button" value="copy"></div>
-			<pre> {{ problem['i_sample'][i] }}</pre>
+			<pre style="margin-left: 3px;">{{ problem['i_sample'][i] }}</pre>
 		</div>
 		<div class="box two_col_half">
 			<div class="caption tocopy">Sample Output {{ i+1 }} <input type="button" value="copy"></div>
-			<pre> {{ problem['o_sample'][i] }}</pre>
+			<pre style="margin-left: 3px;">{{ problem['o_sample'][i] }}</pre>
 		</div>
 	{% endfor %}
 </div>
