@@ -54,7 +54,7 @@ def new_submission(code, lang, pid, user):
         'verdict': '',
         'exetime': 0,
         'exemem': 0,
-        'subtime': f"{today.year}/{today.month}/{today.day}",
+        'subtime': f"{today.year}/{today.month}/{today.day} {today.hour}:{today.minute}",
         'userid': user,
         'error_msg': ''
     }
