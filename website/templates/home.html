@@ -29,11 +29,47 @@
 
 <div class="box two_col_half">
 	<div class="caption">LeaderBoard</div>
-	<div>123<br>iuehrg</div>
+	<div>
+		<table class="table table-stripped table-hover">
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>User</th>
+					<th>Solved</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in range(leadcnt) %}
+				<tr>
+					<th>{{ i+1 }}</th>
+					<th><a href='/user/{{ lead[i]["name"] }}'>{{ lead[i]['name'] }}</a></th>
+					<th>{{ lead[i]['AC'] }}</th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 <div class="box two_col_half">
 	<div class="caption">New Problems</div>
-	<div>12</div>
+	<div>
+		<table class="table table-stripped table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in probs %}
+				<tr>
+					<th>{{ i['pid'] }}</th>
+					<th><a href='/problems/{{ i["pid"] }}'>{{ i['name'] }}</a></th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <div class="box two_col_half">
