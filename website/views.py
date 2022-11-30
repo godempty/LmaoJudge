@@ -20,13 +20,14 @@ def home():
 
 @views.route('/problems')
 def show_problems():
+    per_page = 20
     problem_counts = db['count'].find_one({"name": "problem"})['count']
     page = int(request.args.get("page",0))
-    max_problem_page = int(problem_counts/20)
+    max_problem_page = int(problem_counts/(per_page+1))
     page = min(page, max_problem_page)
     page = max(0, page)
 
-    problems = db['problems'].find({"pid" : { "$gt" : page*20, "$lt": (page+1)*20 }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
+    problems = db['problems'].find({"pid" : { "$gt" : page*per_page, "$lt": (page+1)*per_page }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
     # while problems.alive:
     #     print(problems.next()['pid'])
     return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))
@@ -72,7 +73,7 @@ def submissions_list():
     per_page = 10
     all_cnt = db['submission_data'].count_documents(query)
     page = int(request.args.get("page",0))
-    max_page = int(all_cnt/per_page)
+    max_page = int(all_cnt/(per_page+1))
     page = min(page, max_page)
     page = max(0, page)
 
