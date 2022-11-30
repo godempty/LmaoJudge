@@ -45,6 +45,7 @@ def contests():
 @views.route('/submissions_list/')
 def submissions_list():
     query = dict()
+    string_save = ''
 
     #query user
     if('user' in request.args):
@@ -53,10 +54,12 @@ def submissions_list():
             flash('You Have To Login', category='error')
             return redirect(request.referrer)
         else:
+            string_save += 'user='+get+'&'
             query['userid'] = get
     #query problem
     if('pid' in request.args):
         get = request.args.get('pid', '')
+        string_save += 'pid='+get+'&'
         query['prob'] = get
 
     data = db['submission_data'].find(query,
@@ -72,7 +75,7 @@ def submissions_list():
 
     data.skip(page*per_page).limit(per_page)
 
-    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6), qry=request.query_string)
+    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6), qry=string_save)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):
