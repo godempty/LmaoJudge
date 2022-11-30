@@ -13,7 +13,10 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
     announce = db['announcements'].find()
-    return render_template("home.html", announce = announce)
+    lead = db['account'].find({}, {'name':1, 'AC':1}).sort('AC', -1)
+    leadcnt = db['account'].count_documents({})
+    probs = db['problems'].find({}, {'pid':1, 'name':1}).sort('$natural', -1)
+    return render_template("home.html", announce = announce, lead=lead, leadcnt=leadcnt, probs=probs)
 
 @views.route('/problems')
 def show_problems():
@@ -67,7 +70,7 @@ def submissions_list():
 
     #page
     per_page = 10
-    all_cnt = db['count'].find_one({"name": "submission"})['count']
+    all_cnt = db['submission_data'].count_documents(query)
     page = int(request.args.get("page",0))
     max_page = int(all_cnt/per_page)
     page = min(page, max_page)
