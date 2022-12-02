@@ -8,7 +8,6 @@
 
 <div class="two_col_30">
    <div style="margin: 25px 10px 10px 15px;">
-        <h3>this is profile picture</h3>
         <h5 style="margin-top: 20px; margin-bottom: 20px;"><b>{{ show['name'] }}</b></h5>
         <div class="table-responsive">
             <table class="table">
@@ -27,16 +26,16 @@
                     <td>{{ show['email'] }}</td>
                 </tr>
                 <tr>
-                    <th>AC count</th>
+                    <th>Accepted</th>
                     <td>{{ show['AC'] }}</td>
                 </tr>
                 <tr>
-                    <th>AC count</th>
-                    <td>{{ show['WA'] }}</td>
+                    <th>Attempted</th>
+                    <td>{{ show['attempted'] }}</td>
                 </tr>
             </table>
         </div>
-        <a href="/" class="">Submission List</a>
+        <a href="/submissions_list/?user={{ show['name'] }}" class="">Submission List</a>
     </div>
 </div>
 
@@ -45,16 +44,9 @@
         <div class="caption">Solved Tasks</div>
         <div class="container">
             <div class="row">
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
-                <a class="col" href="/">123</a>
+            {% for i in show['solved'] %}
+                <a class="col" href="/problems/{{ i }}">{{ i }}</a>
+            {% endfor %}
             </div>
         </div>
     </div>
