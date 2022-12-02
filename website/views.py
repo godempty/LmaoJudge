@@ -13,17 +13,21 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
     announce = db['announcements'].find()
-    return render_template("home.html", announce = announce)
+    lead = db['account'].find({}, {'name':1, 'AC':1}).sort('AC', -1)
+    leadcnt = db['account'].count_documents({})
+    probs = db['problems'].find({}, {'pid':1, 'name':1}).sort('$natural', -1)
+    return render_template("home.html", announce = announce, lead=lead, leadcnt=leadcnt, probs=probs)
 
 @views.route('/problems')
 def show_problems():
+    per_page = 20
     problem_counts = db['count'].find_one({"name": "problem"})['count']
     page = int(request.args.get("page",0))
-    max_problem_page = int(problem_counts/20)
+    max_problem_page = int(problem_counts/(per_page+1))
     page = min(page, max_problem_page)
     page = max(0, page)
 
-    problems = db['problems'].find({"pid" : { "$gt" : page*20, "$lt": (page+1)*20 }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
+    problems = db['problems'].find({"pid" : { "$gt" : page*per_page, "$lt": (page+1)*per_page }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
     # while problems.alive:
     #     print(problems.next()['pid'])
     return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))
@@ -45,6 +49,7 @@ def contests():
 @views.route('/submissions_list/')
 def submissions_list():
     query = dict()
+    string_save = ''
 
     #query user
     if('user' in request.args):
@@ -53,10 +58,12 @@ def submissions_list():
             flash('You Have To Login', category='error')
             return redirect(request.referrer)
         else:
+            string_save += 'user='+get+'&'
             query['userid'] = get
     #query problem
     if('pid' in request.args):
         get = request.args.get('pid', '')
+        string_save += 'pid='+get+'&'
         query['prob'] = get
 
     data = db['submission_data'].find(query,
@@ -64,15 +71,15 @@ def submissions_list():
 
     #page
     per_page = 10
-    all_cnt = db['count'].find_one({"name": "submission"})['count']
+    all_cnt = db['submission_data'].count_documents(query)
     page = int(request.args.get("page",0))
-    max_page = int(all_cnt/per_page)
+    max_page = int(all_cnt/(per_page+1))
     page = min(page, max_page)
     page = max(0, page)
 
     data.skip(page*per_page).limit(per_page)
 
-    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6), qry=request.query_string)
+    return render_template("submissions.html", data = data, page = page, max_page = max_page, left=max(0, page-6), right=min(max_page, page+6), qry=string_save)
 
 @views.route('/submit/<id>', methods = ['POST', 'GET'])
 def submit(id):

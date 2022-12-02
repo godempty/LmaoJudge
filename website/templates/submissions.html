@@ -33,21 +33,21 @@
 	<div>
 		<ul class="pagination justify-content-center">
 			{% if page > 0 %}
-			<li class="page-item"><a class="page-link" href="/submissions_list?page={{ page-1 }}">&lt;</a></li>
+			<li class="page-item"><a class="page-link" href="/submissions_list?{{ qry }}page={{ page-1 }}">&lt;</a></li>
 			{% endif %}
 
 			{% for i in range(left, page) %}
-				<li class="page-item"><a class="page-link" href="/submissions_list?page={{ i }}">{{ i }}</a></li>
+				<li class="page-item"><a class="page-link" href="/submissions_list?{{ qry }}page={{ i }}">{{ i }}</a></li>
 			{% endfor %}
 
-			<li class="page-item"><a class="page-link" id="cur_page" href="/submissions_list?page={{ page }}">{{ page }}</a></li>
+			<li class="page-item"><a class="page-link" id="cur_page" href="/submissions_list?{{ qry }}page={{ page }}">{{ page }}</a></li>
 
 			{% for i in range(page+1, right+1) %}
-				<li class="page-item"><a class="page-link" href="/submissions_list?page={{ i }}">{{ i }}</a></li>
+				<li class="page-item"><a class="page-link" href="/submissions_list?{{ qry }}page={{ i }}">{{ i }}</a></li>
 			{% endfor %}
 
             {% if page < max_page %}
-			<li class="page-item"><a class="page-link" href="/submissions_list?page={{ page+1 }}">&gt;</a></li>
+			<li class="page-item"><a class="page-link" href="/submissions_list?{{ qry }}page={{ page+1 }}">&gt;</a></li>
 			{% endif %}
 		</ul>
 	</div>

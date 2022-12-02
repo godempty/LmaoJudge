@@ -9,7 +9,7 @@
 	<div class="caption">Details</div>
 	<table class="table" id="large">
 		<thead>
-			<tr id="colorhead">
+			<tr class="colorhead">
 				<th>Submission ID</th>
 				<th>Problem ID</th>
 				<th>User</th>
@@ -23,7 +23,7 @@
 				<td>{{ id }}</td>
 				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
 				<td><a href="/user/{{ user }}">{{ user }}</a></td>
-				<td><span id="verdict">loading..</span></td>
+				<td><span class="verdict">loading..</span></td>
 				<td>{{ subtime }}</td>
 				<td>{{ lang }}</td>
 			</tr>
@@ -32,27 +32,27 @@
 	<table class="table" id="small">
 		<tbody>
 			<tr>
-				<th id="colorhead">Submission ID</th>
+				<th class="colorhead">Submission ID</th>
 				<td>{{ id }}</td>
 			</tr>
 			<tr>
-				<th id="colorhead">Problem ID</th>
+				<th class="colorhead">Problem ID</th>
 				<td><a href="/problems/{{ pid }}">{{ pid }}</a></td>
 			</tr>
 			<tr>
-				<th id="colorhead">Submit Time</th>
+				<th class="colorhead">Submit Time</th>
 				<td>{{ subtime }}</td>
 			</tr>
 			<tr>
-				<th id="colorhead">User</th>
+				<th class="colorhead">User</th>
 				<td><a href="/user/{{ user }}">{{ user }}</a></td>
 			</tr>
 			<tr>
-				<th id="colorhead">Final Verdict</th>
-				<td><span id="verdict">loading..</span></td>
+				<th class="colorhead">Final Verdict</th>
+				<td><span class="verdict">loading..</span></td>
 			</tr>
 			<tr>
-				<th id="colorhead">Language</th>
+				<th class="colorhead">Language</th>
 				<td>{{ lang }}</td>
 			</tr>
 		</tbody>
@@ -97,7 +97,7 @@
 
 <script type="text/javascript">
 
-const verd = document.getElementById('verdict')
+const verd = document.getElementsByClassName('verdict')
 var curi = 0
 var curj = 0
 var upd = setInterval(function(){
@@ -124,18 +124,21 @@ var upd = setInterval(function(){
 				else break
 			}
 			if(ret.done == 1){
-				verd.innerText = ret.verdict
+				verd[0].innerText = ret.verdict
+				verd[1].innerText = ret.verdict
 				clearInterval(upd)
 
 				// colors for different results
-				const color = document.getElementById('colorhead')
+				const color = document.getElementsByClassName('colorhead')
 				if(ret.verdict == 'CE'){
 					for(let i=0;i<ret.subtask.length;++i) for(let j=0;j<ret.subtask[i].length;++j){
 						const info = document.getElementById('tk' + String(i) + String(j))
 						info.childNodes[3].innerText = 'abort'
 					}
 				}
-				color.style = "background-color: "+get_color(ret.verdict)
+				for(let i=0;i<color.length;++i){
+					color[i].style = "background-color: "+get_color(ret.verdict)
+				}
 
 				// show error message
 				if(ret.err != ''){
