@@ -66,8 +66,8 @@ def signup():
                 'password': password1,
                 'admin': False,
                 'AC': 0,
-                'WA': 0,
-                'AC rate': 0,
+                'attempted': 0,
+                # 'AC rate': 0,
                 'signed up': f"{today}",
             }
             allaccount.insert_one(newaccount)
