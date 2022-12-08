@@ -15,6 +15,8 @@ def home():
     announce = db['announcements'].find()
     lead = db['account'].find({}, {'name':1, 'AC':1}).sort('AC', -1)
     leadcnt = db['account'].count_documents({})
+    if leadcnt > 10:
+        leadcnt = 10
     probs = db['problems'].find({}, {'pid':1, 'name':1}).sort('$natural', -1)
     return render_template("home.html", announce = announce, lead=lead, leadcnt=leadcnt, probs=probs)
 
@@ -106,6 +108,7 @@ def getannounce(id):
     ann = db['announcements'].find_one({"_id": ObjectId(id)})
     session['ann'] = json.loads(json_util.dumps(ann))
     return redirect('/announce')
+
 
 @views.route('/announce')
 def showannounce():

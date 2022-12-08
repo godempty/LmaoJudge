@@ -122,6 +122,17 @@ def judgement(pid, code, lang, subid):
             verdict = name[a]
             break
     subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': verdict, 'exetime': maxtime}})
+    if verdict == 'AC':
+        thissub = subdata.find_one({'_id':subid})
+        thisuserid = thissub['userid']
+        solved = db['account'].find_one({'name': thisuserid})['solved']
+        ACcount = db['account'].find_one({'name': thisuserid})['AC']
+        print(thisuserid)
+        print(solved)
+        if pid not in solved:
+            solved.append(pid)
+            print(solved)
+            db['account'].update_one({'name': thisuserid}, {'$set': {'solved': solved, 'AC':ACcount+1}})
 
     #delete executable
     if(platform.system() == 'Windows'):
