@@ -1,14 +1,6 @@
 from ..db import db
 import subprocess, os, time, psutil, platform
 
-def monitor_mem(arg):
-    pid = arg[0]
-    while 1:
-        try:
-            arg[1] = max(arg[1], psutil.Process(pid).memory_info().rss)
-        except:
-            break
-
 def default_runner(pid, test_number, lang, tl, exe_file, ml):
     execute = object()
     cmd = list()
@@ -69,13 +61,15 @@ def judgement(pid, code, lang, subid):
     exe_file = os.path.abspath(os.path.dirname(__file__) + '/exes/'+str(subid))
 
     prob_data = db['problems'].find_one({'pid': int(pid)})
-    subdata = db['submission_data']
+    doc = db['submission_data']
+    subdata = db['submission_data'].find_one({'_id': subid})
 
     # compile / put code into file
     if(lang == 'c++'):
         compil = subprocess.run(['g++', '-o', exe_file, '-xc++', '-'], text=True, input=code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if(compil.returncode == 1):
-            subdata.update_one({'_id': subid}, {'$set': {'done': 1, 'verdict': 'CE', 'error_msg': compil.stderr}})
+            subdata.update({'done': 1, 'verdict': 'CE', 'error_msg': compil.stderr})
+            doc.replace_one({'_id': subid}, subdata)
             return
     elif(lang == 'python3'):
         exe_file += '.py'
@@ -98,17 +92,15 @@ def judgement(pid, code, lang, subid):
         k = int(k)
         for i in range(prev_test, k+1):
             if(abort):
-                subdata.update_one({'_id': subid}, {'$set': {'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): ['abort', 0, 0]}})
+                subdata['subtask'][cur_subtask][i-prev_test] = ['abort', 0, 0]
                 continue
 
             get = default_runner(pid, i, lang, int(prob_data['time_limit']), exe_file, int(prob_data['memory_limit']))
             save[get[0]] = 1
             maxtime = max(maxtime, get[1])
             maxmem = max(maxmem, get[2])
-            subdata.update_one({'_id': subid}, {'$set': {
-                'subtask.'+str(cur_subtask)+'.'+str(i-prev_test): [name[get[0]], get[1], get[2]],
-                'error_msg': get[3]
-            }})
+            subdata['subtask'][cur_subtask][i-prev_test] = [name[get[0]], get[1], get[2]]
+            subdata['error_msg'] = get[3]
             if(get[0] == 0):
                 abort = 1
         
@@ -127,12 +119,11 @@ def judgement(pid, code, lang, subid):
         thisuserid = thissub['userid']
         solved = db['account'].find_one({'name': thisuserid})['solved']
         ACcount = db['account'].find_one({'name': thisuserid})['AC']
-        print(thisuserid)
-        print(solved)
         if pid not in solved:
             solved.append(pid)
-            print(solved)
             db['account'].update_one({'name': thisuserid}, {'$set': {'solved': solved, 'AC':ACcount+1}})
+    subdata.update({'done': 1, 'verdict': verdict, 'exetime': maxtime})
+    doc.replace_one({'_id': subid}, subdata)
 
     #delete executable
     if(platform.system() == 'Windows'):
