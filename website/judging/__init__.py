@@ -118,10 +118,11 @@ def judgement(pid, code, lang, subid):
         thissub = subdata.find_one({'_id':subid})
         thisuserid = thissub['userid']
         solved = db['account'].find_one({'name': thisuserid})['solved']
-        ACcount = db['account'].find_one({'name': thisuserid})['AC']
         if pid not in solved:
             solved.append(pid)
             db['account'].update_one({'name': thisuserid}, {'$set': {'solved': solved, 'AC':ACcount+1}})
+            ACcount = db['account'].find_one({'name': thisuserid})['AC']
+            
     subdata.update({'done': 1, 'verdict': verdict, 'exetime': maxtime})
     doc.replace_one({'_id': subid}, subdata)
 

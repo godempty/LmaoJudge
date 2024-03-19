@@ -17,8 +17,10 @@ def new_problem(request):
         "tag": request.form.get('tags'),
         "topcoder": "none", 
         "record": 0, #to check topcoder
-        "ac_user": 0.0, #acrate user
-        "ac_submission": 0.0, #acrate submission
+        "ac_user": 0.0, #ac user
+        "ac_submission": 0.0, #ac submission
+        "tried_users": 0,
+        "all_submissions": 0,
         "name": request.form.get('name'),
         "statement": request.form.get('statement'),
         "i_format": request.form.get('i_format'), #input format

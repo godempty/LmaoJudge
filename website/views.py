@@ -29,7 +29,7 @@ def show_problems():
     page = min(page, max_problem_page)
     page = max(0, page)
 
-    problems = db['problems'].find({"pid" : { "$gt" : page*per_page, "$lt": (page+1)*per_page }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1})
+    problems = db['problems'].find({"pid" : { "$gt" : page*per_page, "$lt": (page+1)*per_page }},{'_id':0,'pid': 1, 'name': 1, 'topcoder': 1, 'ac_user': 1, 'ac_submission': 1,'tried_users':1,'all_submissions':1})
     # while problems.alive:
     #     print(problems.next()['pid'])
     return render_template("problems.html", problems = problems, page = page, max_problem_page = max_problem_page, left=max(0, page-6), right=min(max_problem_page, page+7))

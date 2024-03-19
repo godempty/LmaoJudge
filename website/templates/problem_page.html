@@ -1,120 +1,152 @@
-<link rel="stylesheet" href='{{ url_for("static", filename = "css/problem_page.css") }}'>
+<link
+  rel="stylesheet"
+  href='{{ url_for("static", filename = "css/problem_page.css") }}'
+/>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-{% extends "base.html" %}
-{% block content %}
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+{% extends "base.html" %} {% block content %}
 
 <div>
-	<h2>{{ problem['name'] }}</h2>
-	<div id="id_box">{{ problem['pid'] }}</div>
+  <h2>{{ problem['name'] }}</h2>
+  <div id="id_box">{{ problem['pid'] }}</div>
 </div>
 <div class="two_col_80">
-	<div class="navbar navbar-expand-md" id="buttonrow" style="width: 98%; justify-content: left;">
-		<a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
-		<a id="allsubbut" href="/submissions_list/?pid={{ problem['pid'] }}">All Submission</a>
-		{% if session['user'] %}
-			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user={{ session['user']['name'] }}">My Submission</a>
-		{% else %}
-			<a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user=">My Submission</a>
-		{% endif %}
-		<a id="rankbut" href="/">Rank</a>
-	</div>
+  <div
+    class="navbar navbar-expand-md"
+    id="buttonrow"
+    style="width: 98%; justify-content: left"
+  >
+    <a id="submitbut" href="/submit/{{ problem['pid'] }}">Submit</a>
+    <a id="allsubbut" href="/submissions_list/?pid={{ problem['pid'] }}"
+      >All Submission</a
+    >
+    {% if session['user'] %}
+    <a
+      id="mysubbut"
+      href="/submissions_list/?pid={{ problem['pid'] }}&user={{ session['user']['name'] }}"
+      >My Submission</a
+    >
+    {% else %}
+    <a id="mysubbut" href="/submissions_list/?pid={{ problem['pid'] }}&user="
+      >My Submission</a
+    >
+    {% endif %}
+    <a id="rankbut" href="/">Rank</a>
+  </div>
 
-	<div class="box" style="width: 98%;">
-		<div class="caption">Statement</div>
-		<div> {{ problem['statement'] }}</div>
-	</div>
+  <div class="box" style="width: 98%">
+    <div class="caption">Statement</div>
+    <div>{{ problem['statement'] }}</div>
+  </div>
 
-	<div class="box two_col_half">
-		<div class="caption">Input</div>
-		<div> {{ problem['i_format'] }}</div>
-	</div>
+  <div class="box two_col_half">
+    <div class="caption">Input</div>
+    <div>{{ problem['i_format'] }}</div>
+  </div>
 
-	<div class="box two_col_half">
-		<div class="caption">Output</div>
-		<div> {{ problem['o_format'] }}</div>
-	</div>
-	{% for i in range(lens) %}
-		<div class="box two_col_half">
-			<div class="caption tocopy">Sample Input {{ i+1 }} <input type="button" value="copy"></div>
-			<pre style="margin-left: 3px;">{{ problem['i_sample'][i] }}</pre>
-		</div>
-		<div class="box two_col_half">
-			<div class="caption tocopy">Sample Output {{ i+1 }} <input type="button" value="copy"></div>
-			<pre style="margin-left: 3px;">{{ problem['o_sample'][i] }}</pre>
-		</div>
-	{% endfor %}
+  <div class="box two_col_half">
+    <div class="caption">Output</div>
+    <div>{{ problem['o_format'] }}</div>
+  </div>
+  {% for i in range(lens) %}
+  <div class="box two_col_half">
+    <div class="caption tocopy">
+      Sample Input {{ i+1 }} <input type="button" value="copy" />
+    </div>
+    <pre style="margin-left: 3px">{{ problem['i_sample'][i] }}</pre>
+  </div>
+  <div class="box two_col_half">
+    <div class="caption tocopy">
+      Sample Output {{ i+1 }} <input type="button" value="copy" />
+    </div>
+    <pre style="margin-left: 3px">{{ problem['o_sample'][i] }}</pre>
+  </div>
+  {% endfor %}
 </div>
 
 <div class="two_col_20">
-	<div class="box">
-		<div class="caption">Problem Info</div>
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>Author</th>
-					<td>{{ problem['Author'] }}</td>
-				</tr>
-				<tr>
-					<th>Tags</th>
-					<td>{{ problem['tag'] }}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="box">
-		<div class="caption">Limits</div>
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>Time Limit</th>
-					<td>{{ problem['time_limit'] }}</td>
-				</tr>
-				<tr>
-					<th>Memory Limit</th>
-					<td>{{ problem['memory_limit'] }}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="box">
-		<div class="caption">Status</div>
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>Topcoder</th>
-					<td>{{ problem['topcoder'] }}</td>
-				</tr>
-				<tr>
-					<th>AC Rate (user)</th>
-					<td>{{problem['ac_user']}}%</td>
-				</tr>
-				<tr>
-					<th>AC Rate (submission)</th>
-					<td>{{ problem['ac_submission'] }}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+  <div class="box">
+    <div class="caption">Problem Info</div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Author</th>
+          <td>{{ problem['Author'] }}</td>
+        </tr>
+        <tr>
+          <th>Tags</th>
+          <td>{{ problem['tag'] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box">
+    <div class="caption">Limits</div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Time Limit</th>
+          <td>{{ problem['time_limit'] }}</td>
+        </tr>
+        <tr>
+          <th>Memory Limit</th>
+          <td>{{ problem['memory_limit'] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box">
+    <div class="caption">Status</div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Topcoder</th>
+          <td>{{ problem['topcoder'] }}</td>
+        </tr>
+        <tr>
+          <th>AC Rate (user)</th>
+          {% if problem['tried_users'] != 0 %}
+          <td>{{(problem['ac_user']/problem['tried_users']*10000)/100}}%</td>
+          {% else %}
+          <td>0</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <th>AC Rate (submission)</th>
+          {% if problem['tried_users'] != 0 %}
+          <td>
+            {{(problem['ac_submission']/problem['all_submissions']*10000)/100}}%
+          </td>
+          {% else %}
+          <td>0</td>
+          {% endif %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script>
-	const copybtn = document.querySelectorAll('.tocopy input')
-	const tt = document.querySelectorAll('.tocopy + div')
-	for(let i = 0; i < copybtn.length; i++){
-		copybtn[i].addEventListener('click', function() {
-			const range = document.createRange()
-			range.selectNode(tt[i])
-			const select = window.getSelection()
-			select.removeAllRanges()
-			select.addRange(range)
-			document.execCommand('copy')
-			select.removeAllRanges()
-			copybtn[i].value = "copied!"
-			setTimeout(function() {
-				copybtn[i].value = "copy"
-			}, 800)
-		})
-	}
+  const copybtn = document.querySelectorAll(".tocopy input");
+  const tt = document.querySelectorAll(".tocopy + div");
+  for (let i = 0; i < copybtn.length; i++) {
+    copybtn[i].addEventListener("click", function () {
+      const range = document.createRange();
+      range.selectNode(tt[i]);
+      const select = window.getSelection();
+      select.removeAllRanges();
+      select.addRange(range);
+      document.execCommand("copy");
+      select.removeAllRanges();
+      copybtn[i].value = "copied!";
+      setTimeout(function () {
+        copybtn[i].value = "copy";
+      }, 800);
+    });
+  }
 </script>
 {% endblock %}
