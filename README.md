@@ -1,4 +1,17 @@
 # LmaoJudge
+
+package used:
+
+1. bson
+2. datetime
+3. flask
+4. hashlib
+5. platform
+6. psutil
+7. pymongo
+8. subprocess
+9. zipfile
+
 website
 
 - judging -> where user submitted code is evaluated

@@ -105,7 +105,7 @@ def submit(id):
 
 @views.route('/announce/<id>')
 def getannounce(id):
-    ann = db['announcements'].find_one({"_id": ObjectId(id)})
+    ann = db['announcements'].find_one({"id": id})
     session['ann'] = json.loads(json_util.dumps(ann))
     return redirect('/announce')
 

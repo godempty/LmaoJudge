@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from flask import Blueprint, render_template, request, redirect, session, url_for
+import hashlib
 from bson.objectid import ObjectId
 import os
 from zipfile import ZipFile
@@ -21,11 +22,13 @@ def addannounce():
         announce = db['announcements'].find()
         if request.method == 'POST':
             today =datetime.now()
+            n_id = hashlib.sha256(str(today).encode()).hexdigest()
             announcement = {
                 'title': request.form.get('title'),
                 'context': request.form.get('context'),
                 'time': f"{today.year}/{today.month}/{today.day}",
                 'author': session['user']['name'],
+                'id': n_id,
             }
 
             db['announcements'].insert_one(announcement)
